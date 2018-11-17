@@ -1,0 +1,105 @@
+$open-card-height: 220px;
+
+.meet {
+    background: none;
+    border: 0;
+    box-sizing: border-box;
+    padding: 1em 2em;
+    box-shadow: inset 0 0 0 1px #0c5860;
+    font-size: inherit;
+    font-weight: 700;
+    height: $open-card-height;
+    max-height: calc(#{$open-card-height} - 80px);
+    position: relative;
+    vertical-align: middle;
+    transition: max-height 0.5s, background-color 0.5s;
+    -webkit-transition: max-height 0.5s, background-color 0.5s;
+    
+    &::before, &::after {
+        box-sizing: inherit;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 3px solid transparent;
+        width: 0;
+        height: 0;
+    }
+    &::before {
+        top: 0;
+        left: 0;
+    }
+    &:hover::before, &:hover::after {
+        width: 100%;
+        height: 100%;
+    }
+    &:hover {
+        max-height: $open-card-height;
+    }
+    &::after {
+        top: 0;
+        left: 0;
+    }
+    
+    &:hover::before {
+        border-top-color: #19b7f6;
+        border-right-color: #19b7f6;
+        transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
+        -webkit-transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
+    }
+    &:hover::after {
+        border-bottom-color: #19b7f6;
+        border-left-color: #19b7f6;
+        transition: height 0.25s ease-out, width 0.25s ease-out 0.25s;
+        -webkit-transition: height 0.25s ease-out, width 0.25s ease-out 0.25s;
+    }
+}
+
+.parcours-bloc-parent {
+    .parcours-bloc {
+        font-family: 'Roboto Condensed';
+        font-size: 22px;
+        line-height: 32px;
+        letter-spacing: 2px;
+        color: #fff;
+        position: relative;
+        
+        .parcours-hr {
+            margin: 20px auto !important;
+            border-top: 1px solid #fff;
+            max-width: 50px;
+        }
+        
+        .parcours-desc {
+            color: #ddd;
+            padding: 0 2%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-size: medium;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 1s;
+            -webkit-transition: visibility 0s, opacity 1s;
+        }
+        &:hover{
+            background-color: #222;
+        }
+        &:hover .parcours-desc{
+            visibility: visible;
+            opacity: 1;
+            transition: visibility 0s, opacity 1s;
+            -webkit-transition: visibility 0s, opacity 1s;
+        }
+    }
+}
+
+@media (max-width: 770px) {
+    /* each parcours bloc in a single row --> no animation*/
+    .meet {
+        max-height: calc(100% + 50px);
+    } 
+}
+
+/*# sourceMappingURL=sass.css.map */
