@@ -56,6 +56,10 @@ $open-card-height: 220px;
 }
 
 .parcours-bloc-parent {
+    display: inline-block;
+    margin: 0 0 5vh;
+    position: relative;
+    
     .parcours-bloc {
         font-family: 'Roboto Condensed';
         font-size: 22px;
