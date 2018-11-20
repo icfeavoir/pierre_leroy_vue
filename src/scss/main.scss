@@ -4,10 +4,43 @@
     overflow: hidden;
 }
 
+.diago-left, .diago-right {
+    z-index: 1;
+}
+.diago-right {
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 100%,
+        0 calc(100% - 5vw)
+    );
+}
+.diago-left {
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 5vw),
+        0 100%
+    );
+}
+
+.under-diago {
+    margin-top: -5vw;
+    padding-top: 5vw;
+    height: calc(100vh + 5vw);
+}
+
+#svg {
+    background: #BBD2C5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+
 #card-container {
     background-color: rgb(20,20,20);
-    padding: 50px 0;
     overflow-x: hidden;
+    height: auto;
+    padding: 10vh 0;
 }
 
 #balls {

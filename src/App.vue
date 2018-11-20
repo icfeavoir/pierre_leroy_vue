@@ -1,26 +1,25 @@
 <template>
 
   	<div>
-		<div class="full" id="svg">
+		<div class="full diago-right" id="svg">
 			<Draw :depth="-2"/>
 		</div>
-    	<div class="full" id="test">
+
+    	<div class="full diago-left under-diago" id="test">
       		<button id="switch-btn" v-on:click="changeLang">switch</button>
       		<p id="text-lang">{{ msg }}</p>
-
-			<br>
     	</div>
 
-		<BGParallax url="achievments.jpg" title="Travaux" credit="Photo by Samuel Zeller on Unsplash" />
+		<b-g-parallax class="under-diago" url="achievments.jpg" title="Réalisations" credit="Photo by Samuel Zeller on Unsplash" />
 
-		<div class="text-center" id="card-container">
-            <Card class="col-lg-6 col-mg-12" :direction=1 date="Septembre − Novembre 2017" title="YouPic" desc="Stage technique − Développement Web<br>(frontend et backend)" />
-            <Card class="col-lg-6 col-mg-12" :direction=-1 date="2016 − 2018" title="SEIO" desc="Directeur des Systèmes d'Informations de la Junior-Entreprise de l'ESEO" />
-            <Card class="col-lg-6 col-mg-12" :direction=1 :speed=1.3 date="Août 2015" title="Modularis" desc="Stage de programmation − Développement d’un intranet pour la gestion des SAV" />
-            <Card class="col-lg-6 col-mg-12" :direction=-1 :speed=1.3 date="Juillet 2014, 2015, 2016, 2017" title="Loisirs Pour Tous" desc="Animateur de centre-aéré" />
+		<div class="diago-left text-center" id="card-container">
+            <Card :direction=1 date="Septembre − Novembre 2017" title="YouPic">Stage technique − Développement Web<br>(frontend et backend)</Card>
+            <Card :direction=-1 date="2016 − 2018" title="SEIO">Directeur des Systèmes d'Informations de la Junior-Entreprise de l'ESEO</Card>
+            <Card :direction=1 date="Août 2015" title="Modularis">Stage de programmation − Développement d’un intranet pour la gestion des SAV</Card>
+            <Card :direction=-1 date="Juillet 2014, 2015, 2016, 2017" title="Loisirs Pour Tous">Animateur de centre-aéré</Card>
 		</div>
 
-		<BGParallax url="works.png" title="Skills" credit="Google" />
+		<b-g-parallax class="under-diago" url="skills.jpg" title="Skills" credit="Photo by Jaredd Craig on Unsplash" />
 
 		<div class="full" id="balls">
 			<Ball text="HTML" size=80 textColor="white" bgColor="#F06529" posX=10 posY=10 />
@@ -35,6 +34,7 @@
 			<Ball text="Linux" size=70 textColor="#fdfdfb" bgColor="black" posX=38 posY=40 />
 		</div>
     </div>
+
 </template>
 
 <script>
@@ -42,6 +42,7 @@ import Ball from './components/Ball.vue'
 import Card from './components/Card.vue'
 import BGParallax from './components/BGParallax.vue'
 import Draw from './components/Draw.vue'
+import SideParallax from './components/SideParallax.vue'
 
 export default {
 	name: 'app',
@@ -50,6 +51,7 @@ export default {
 		Card,
 		BGParallax,
 		Draw,
+		SideParallax
   	},
 	mounted() {
 		new Parallax($('#balls').get(0));
@@ -112,6 +114,6 @@ export default {
     #test {
       background-color: green;
       color: white;
-      padding: 50px;
 	}
+
 </style>
