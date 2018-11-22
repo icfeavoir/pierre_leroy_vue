@@ -2,6 +2,8 @@
     <div class="menu" >
         <ul>
             <li>Main</li>
+            <li>Skills</li>
+            <li>Contact</li>
         </ul>
     </div>
 </template>

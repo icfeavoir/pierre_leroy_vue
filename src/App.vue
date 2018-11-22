@@ -1,38 +1,58 @@
 <template>
 
   	<div>
-		<div class="full diago-right" id="svg">
-			<Draw :depth="-2"/>
+		<div class="full diago-right" id="main">
+			<div id="me-img-container"><img id="me-img" class="show-img-animation" alt="me" src="./assets/me.jpg" /></div>
+			<p class="name">Pierre LEROY</p>
+			<p>{{ age }} ans − Actuellement en 5<sup>ème</sup> année d'ingénieur à l'<a target="_blank" href="https://eseo.fr">ESEO</a> et en alternance à <a target="_blank" href="https://oet.fr">OET</a></p>
+			<div id="svg"><Draw :speed="-1"/></div>
 		</div>
 
-    	<div class="full diago-left under-diago" id="test">
+    	<!-- <div class="full under-diago diago-left" id="test">
       		<button id="switch-btn" v-on:click="changeLang">switch</button>
       		<p id="text-lang">{{ msg }}</p>
-    	</div>
-
+    	</div> -->
+		
 		<b-g-parallax class="under-diago" url="achievments.jpg" title="Réalisations" credit="Photo by Samuel Zeller on Unsplash" />
 
 		<div class="diago-left text-center" id="card-container">
-            <Card :direction=1 date="Septembre − Novembre 2017" title="YouPic">Stage technique − Développement Web<br>(frontend et backend)</Card>
-            <Card :direction=-1 date="2016 − 2018" title="SEIO">Directeur des Systèmes d'Informations de la Junior-Entreprise de l'ESEO</Card>
-            <Card :direction=1 date="Août 2015" title="Modularis">Stage de programmation − Développement d’un intranet pour la gestion des SAV</Card>
-            <Card :direction=-1 date="Juillet 2014, 2015, 2016, 2017" title="Loisirs Pour Tous">Animateur de centre-aéré</Card>
+            <Card :direction=1 date="Septembre − Novembre 2017" url="https://youpic.com" title="YouPic">
+				Stage technique − Développement Web (3 mois)<br>
+				Frontend (React) & backend (MySQL, Kotlin, PHP)
+			</Card>
+            <Card :direction=-1 date="Janvier − Juin 2018" title="Projet SE">
+				Projet d'école option Systèmes Embarqués<br>
+				Spécification, Conception & Développement Android (Java)
+			</Card>
+            <Card :direction=1 date="2016 − 2018" url="https://seio.org" title="SEIO">
+				DSI de la Junior-Entreprise de l'ESEO<br>
+				Suivi de projet & Développement d'un intranet (PHP, MySQL, JavaScript)
+			</Card>
+            <Card :direction=-1 date="Août 2015" url="https://informatique.e-pro.fr/sarthe/modularis_f785537" title="Modularis">
+				Stage de programmation (1 mois)<br>
+				Développement d’un intranet pour la gestion des SAV (PHP)
+			</Card>
 		</div>
 
 		<b-g-parallax class="under-diago" url="skills.jpg" title="Skills" credit="Photo by Jaredd Craig on Unsplash" />
 
 		<div class="full" id="balls">
 			<Ball text="HTML" size=80 textColor="white" bgColor="#F06529" posX=10 posY=10 />
-			<Ball text="CSS" size=50 textColor="white" bgColor="#264de4" posX=15 posY=40 />
-			<Ball text="PHP" size=80 textColor="white" bgColor="#4f5b93" posX=70 posY=20 />
-			<Ball text="JS" size=65 textColor="black" bgColor="#f7df1e" posX=40 posY=5 />
-			<Ball text="Java" size=70 textColor="white" bgColor="#FFA518" posX=80 posY=80 />
+			<Ball text="CSS" size=60 textColor="white" bgColor="#264de4" posX=15 posY=40 />
+			<Ball text="PHP" size=85 textColor="white" bgColor="#4f5b93" posX=70 posY=20 />
+			<Ball text="Java" size=75 textColor="white" bgColor="#FFA518" posX=80 posY=70 />
 			<Ball text="NodeJS" size=50 textColor="white" bgColor="#215732" posX=10 posY=80 />
 			<Ball text="SQL" size=60 textColor="white" bgColor="#00758f" posX=60 posY=60 />
 			<Ball text="Android" size=60 textColor="white" bgColor="#a4c639" posX=50 posY=75 />
-			<Ball text="Laravel" size=60 textColor="white" bgColor="#ff4b26" posX=28 posY=70 />
-			<Ball text="Linux" size=70 textColor="#fdfdfb" bgColor="black" posX=38 posY=40 />
+			<Ball text="Laravel" size=80 textColor="white" bgColor="#ff4b26" posX=28 posY=70 />
+			<Ball text="Linux" size=60 textColor="#fdfdfb" bgColor="black" posX=40 posY=5 />
+			<Ball text="JS" size=65 textColor="black" bgColor="#f7df1e" posX=38 posY=40 />
+			<Ball text="Vue.js" size=50 textColor="#35495e" bgColor="#41b883" posX=56 posY=30 />
 		</div>
+
+		<b-g-parallax id="contact" class="under-diago" url="contact.jpg" :titleOnTop=true title="Contact" credit="Photo by Marius Christensen on Unsplash">
+			<p>06.48.44.45.12</p>
+		</b-g-parallax>
     </div>
 
 </template>
@@ -55,8 +75,10 @@ export default {
   	},
 	mounted() {
 		new Parallax($('#balls').get(0));
-		new Parallax($('#svg').get(0));
 		this.msg = this.lang[this.selected];
+		// setTimeout(() => {
+		// 	$(this.$el.querySelector('#me-img')).css({width: 150});
+		// }, 500);
 	},
 	data() {
 		return {
@@ -66,6 +88,12 @@ export default {
 			},
 			selected: 'fr',
 			msg: '',
+		}
+	},
+	computed: {
+		age: () => {
+			const birthday = new Date("1996-07-12");
+			return new Date(Date.now() - birthday).getFullYear() - 1970;
 		}
 	},
 	methods: {
@@ -110,10 +138,4 @@ export default {
 
 <style lang="scss" scoped>
     @import './scss/main.scss';
-
-    #test {
-      background-color: green;
-      color: white;
-	}
-
 </style>

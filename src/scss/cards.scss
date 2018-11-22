@@ -99,6 +99,10 @@ $open-card-height: 220px;
     }
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 @media (max-width: 770px) {
     /* each parcours bloc in a single row --> no animation*/
     .meet {

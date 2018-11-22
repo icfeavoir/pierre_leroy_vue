@@ -1,11 +1,13 @@
 <template>
     <side-parallax :direction=direction :speed=speed class="col-lg-6 col-md-12 text-center parcours-bloc-parent">
-        <div class="parcours-bloc meet">
-            <p class="parcours-year">{{ date }}</p>
-            <hr class="parcours-hr">
-            <p class="parcours-title">{{ title }}</p>
-            <p class="parcours-desc"><slot></slot></p>
-        </div>
+        <a  :href="realUrl" :target="target">
+            <div class="parcours-bloc meet">
+                <p class="parcours-year">{{ date }}</p>
+                <hr class="parcours-hr">
+                <p class="parcours-title">{{ title }}</p>
+                <p class="parcours-desc"><slot></slot></p>
+            </div>
+        </a>
     </side-parallax>
 </template>
 
@@ -21,6 +23,15 @@ export default {
         speed: Number,
         date: String,
         title: String,
+        url: String,
+    },
+    computed: {
+        realUrl: function() {
+            return this.url || '#0';
+        },
+        target: function() {
+            return this.url ? '_blank' : '';
+        }
     },
 }
 </script>
