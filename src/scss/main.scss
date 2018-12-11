@@ -6,32 +6,6 @@
     position: relative;
 }
 
-.diago-left, .diago-right {
-    z-index: 3;
-}
-.diago-right {
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% 100%,
-        0 calc(100% - 5vw)
-    );
-}
-.diago-left {
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        100% calc(100% - 5vw),
-        0 100%
-    );
-}
-
-.under-diago {
-    margin-top: -5vw;
-    padding-top: 5vw;
-    height: calc(100vh + 5vw);
-}
-
 // ORDER OF DIV
 @keyframes show-img-animation {
     0% { height: 0; }
@@ -42,12 +16,25 @@
     animation: show-img-animation 1s forwards ease-in;
 }
 
+$triangle-size: 6vh;
 #main {
-    background: #bbd2c5;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-    height: 110vh;
-    min-height: 470px;
+    z-index: 2;
+    filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.8)) drop-shadow(0 5px 5px rgba(0,0,0,0.8));
+    height: auto;
+    background-color: transparent;
+    
+    #main-shape {
+        background: #cdcdcd;
+        height: calc(100vh + #{$triangle-size});
+        min-height: 470px;
+        clip-path: polygon(
+            0 0,
+            100% 0,
+            100% calc(100% - #{$triangle-size}),
+            30% 100%,
+            0 calc(100% - #{$triangle-size})
+        );
+    }
 
     #me-img-container {
         height: 180px;
@@ -70,29 +57,68 @@
             letter-spacing: 5px;
         }
         a {
-            text-decoration: underline;
+            text-decoration: none;
             color: #1a4f65;
         }
     }
 }
 
-#card-container {
+#achievments-split {
+    margin-top: -$triangle-size;
+    height: 50vh;
+    z-index: 1;
+}
+
+#achievments {
     background-color: rgb(20,20,20);
-    overflow-x: hidden;
     height: auto;
     padding: 10vh 0;
+    overflow: hidden;
 }
 
-#balls {
-    background-color: #bbd2c5;
-    background: -webkit-linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-    text-align: center;
-    height: 100vh;
-    padding: 10px;
-}
-
-#contact {
+#skills {
     height: 110vh;
     max-height: none;
+    
+    #balls {
+        text-align: center;
+        height: 70%;
+        padding: 10px;
+    }
+}
+
+#about {
+    z-index: 2;
+    filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.8)) drop-shadow(0 5px 5px rgba(0,0,0,0.8));
+    height: auto;
+    background-color: transparent;
+    margin-top: -$triangle-size;
+
+    .title {
+        font-size: 45px;
+        margin-top: $triangle-size;
+        color: white;
+    }
+
+    #about-shape {
+        background-color: rgb(100, 150, 200);
+        text-align: center;
+        overflow: auto;
+        height: calc(100vh + #{$triangle-size});
+        min-height: 470px;
+        clip-path: polygon(
+            0 $triangle-size,
+            33% 0,
+            100% $triangle-size,
+            100% calc(100% - #{$triangle-size}),
+            66% 100%,
+            0 calc(100% - #{$triangle-size})
+        );
+    }
+}
+
+#contact-split {
+    height: 40vh;
+    z-index: 1;
+    margin-top: -$triangle-size;
 }

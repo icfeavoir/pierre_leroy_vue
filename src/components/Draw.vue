@@ -23,27 +23,28 @@ export default {
             this.height = $(window).height();
         },
     },
-  mounted() {
-    SVG($('.layer').get(0))
-        .size(50, 205)
-        .path()
-        .attr({ 
-        fill: 'none',
-        stroke: 'white', 
-        'stroke-width': 2,
-    })
-        .M(20, 30)
-        .l(0, 75)
-        .l(-20, 0)
-        .l(25, 30)
-        .l(25, -30)
-        .l(-20, 0)
-        .l(0, -75)
-        .l(-10, 0)
-        .drawAnimated({
-            easing: "<>"
-        });
-
+    mounted() {
+        setTimeout(() => {
+            SVG($('.layer').get(0))
+                .size(50, 205)
+                .path()
+                .attr({ 
+                fill: 'none',
+                stroke: '#0d2732', 
+                'stroke-width': 1,
+            })
+                .M(20, 30)
+                .l(0, 75)
+                .l(-20, 0)
+                .l(25, 30)
+                .l(25, -30)
+                .l(-20, 0)
+                .l(0, -75)
+                .l(-10, 0)
+                .drawAnimated({
+                    easing: "<>"
+                });
+        }, 2000);
     this.onResize();
     window.addEventListener('resize', this.onResize);
 

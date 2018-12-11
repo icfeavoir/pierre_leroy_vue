@@ -1,74 +1,40 @@
 <template>
-    <div id="menu">
-        <ul>
-            <li>
-                <a class="menu-choice"  href="#main">
-                <div class="little-btn active"></div><span class="menu-text">Pierre Leroy</span>
-                </a>
-            </li>
-            <li>
-                <a class="menu-choice"  href="#achievments">
-                <div class="little-btn"></div><span class="menu-text">Expérience</span>
-                </a>
-            </li>
-            <li>
-                <a class="menu-choice"  href="#skills">
-                <div class="little-btn"></div><span class="menu-text">Compétences</span>
-                </a>
-            </li>
-            <li>
-                <a class="menu-choice"  href="#about">
-                <div class="little-btn"></div><span class="menu-text">À Propos</span>
-                </a>
-            </li>
-            <li>
-                <a class="menu-choice"  href="#contact">
-                <div class="little-btn"></div><span class="menu-text">Contact</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+    <li>
+        <a class="menu-choice"  href="#num1">
+        <div class="little-btn active"></div><span class="menu-text">First</span>
+        </a>
+    </li>
 </template>
 
 <script>
 export default {
-    name: 'Menu',
-    props: {
-        title: Array,
-        divs: Array,
-    },
-    computed: {
-    },
-    mounted() {
-        // initial state
+  name: 'Menu',
+  props: {
+  },
+  computed: {
+  },
+  mounted() {
+        $( window ).on( "resize", function( event ) {
+        // unbind
+        $('.menu-text').unbind('hover');
+        console.log(jQuery($('.menu-text')).data( "events" ));
         if (window.innerWidth > window.innerHeight) {
+            console.log('ok');
             // rebind if landscape mode
             $('.menu-choice').hover(
             () => {$('.menu-text').css({opacity: 1})},
             () => {$('.menu-text').css({opacity: 0})}
             )
         }
-
-        // ON RESIZE (MANAGIN LANDSCAPE - PORTRAIT)
-        $( window ).on( "resize", function( event ) {
-            // unbind
-            $('.menu-text').unbind('hover');
-            if (window.innerWidth > window.innerHeight) {
-                // rebind if landscape mode
-                $('.menu-choice').hover(
-                () => {$('.menu-text').css({opacity: 1})},
-                () => {$('.menu-text').css({opacity: 0})}
-                )
-            }
         });
 
         $('.menu-choice').click(function(e) {
-            e.preventDefault();
-            $('.little-btn').removeClass('active');
-            $(this).children('.little-btn').addClass('active');
-            var div = $($(this).attr('href')); // Page cible
-            var speed = 1000; // Durée de l'animation (en ms)
-            $('html, body').animate( { scrollTop: div.children().first().offset().top }, speed, "swing");
+        e.preventDefault();
+        $('.little-btn').removeClass('active');
+        $(this).children('.little-btn').addClass('active');
+        var div = $($(this).attr('href')); // Page cible
+        var speed = 750; // Durée de l'animation (en ms)
+        $('html, body').animate( { scrollTop: div.children().first().offset().top }, speed, "swing");
         })
 
         // Cache selectors
@@ -77,10 +43,10 @@ export default {
             // All list items
             menuItems = topMenu.find("a"),
             // Anchors corresponding to menu items
-        scrollItems = menuItems.map(function(){
+            scrollItems = menuItems.map(function(){
             var item = $($(this).attr("href"));
             if (item.length) { return item; }
-        });
+            });
 
         // Bind to scroll
         $(window).scroll(function(){
@@ -104,7 +70,7 @@ export default {
                 .filter("[href='#"+id+"']").children('.little-btn').addClass('active');
         }                   
         });
-    },
+  },
 }
 </script>
 
@@ -119,14 +85,12 @@ export default {
 
 #menu {
   position: fixed;
-  width: auto;
+  width: 100%;
   height: 100%;
   padding: 0 25px;
   display: table;
   z-index: 100;
   @media (orientation: portrait) {
-    width: 100%;
-    height: auto;
     text-align: center;
     height: auto;
     padding: 0 0;
@@ -150,7 +114,6 @@ export default {
 }
 .menu-text {
   font-size: 20px;
-  font-family: Arial, Helvetica, sans-serif;
   color: white;
   text-shadow: 0 1px 0px black, 1px 0 0px black, 0 -1px 0px black, -1px 0 0px black, 2px 2px 5px black;
   padding: 5px 10px;

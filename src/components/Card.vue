@@ -1,6 +1,6 @@
 <template>
     <side-parallax :direction=direction :speed=speed class="col-lg-6 col-md-12 text-center parcours-bloc-parent">
-        <a  :href="realUrl" :target="target">
+        <a :href="realUrl" :target="target">
             <div class="parcours-bloc meet">
                 <p class="parcours-year">{{ date }}</p>
                 <hr class="parcours-hr">

@@ -29,7 +29,6 @@ export default {
         handleScroll: function() {
             let coef = $(window).height() / 5;
             let diff = $(this.$el).position().top - $(document).scrollTop() - coef;
-
             this.toLeft = this.direction * (- diff + coef);
             this.toLeft = this.direction * this.toLeft >= 0 ? 0 : this.toLeft;
         },

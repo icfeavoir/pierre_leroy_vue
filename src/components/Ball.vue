@@ -8,7 +8,7 @@
       backgroundColor: bgColor,
       color: textColor
     }">
-      <p style="display: table-cell; vertical-align: middle;">{{ text }}</p>
+      <p class="ball-skill" :style="{'font-size': fontSize}">{{ text }}</p>
     </div>
   </div>
 </template>
@@ -45,6 +45,9 @@ export default {
     realY: function() {
       return this.posY * this.height / 100;
     },
+    fontSize: function() {
+      return this.realSize * 1.2 / this.text.length + 'px';
+    }
   },
   methods: {
     winValues: function() {
@@ -65,15 +68,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .ball {
-  position: absolute;
-  overflow: hidden;
-  border-radius: 50%;
+  /* DEFAULT */
   background-color: black;
   color: blue;
+  position: absolute;
+  opacity: 0.88;
+  overflow: hidden;
+  border-radius: 50%;
   font-weight: bold;
   text-align: center;
+  font-size: 1vw;
   display: table;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-transform: uppercase;
 }
 
 .ball-skill {
