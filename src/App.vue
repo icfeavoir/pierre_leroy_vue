@@ -1,8 +1,7 @@
 <template>
 
-  	<div>
-	  	<Menu />
-		  
+	<div>
+		<Menu />
 		<div class="full" id="main">
 			<div id="main-shape">
 				<div style="display: inline-block; margin-top: -10vh; margin-bottom: 10vh"></div> <!-- Menu scroll -->
@@ -80,7 +79,7 @@ import Card from './components/Card.vue'
 import CardShadow from './components/CardShadow.vue'
 import BGParallax from './components/BGParallax.vue'
 import Draw from './components/Draw.vue'
-import SideParallax from './components/SideParallax.vue'
+// import SideParallax from './components/SideParallax.vue'
 import Menu from './components/Menu.vue'
 import Gif from './components/Gif.vue'
 
@@ -92,14 +91,14 @@ export default {
 		CardShadow,
 		BGParallax,
 		Draw,
-		SideParallax,
+		// SideParallax,
 		Menu,
 		Gif,
-  	},
+	},
 	mounted() {
-		new Parallax($('#balls').get(0), {
-			hoverOnly: false,
-		});
+		// new Parallax($('#balls').get(0), {
+		// 	hoverOnly: false,
+		// });
 		this.msg = this.lang[this.selected];
 	},
 	data() {
@@ -134,7 +133,7 @@ export default {
 			}
 		},
 		replaceLetter: async function(actual, newSentence, i) {
-			return new Promise((resolve, reject) => {
+			return new Promise((resolve) => {
 				setTimeout(function() {
 					if (actual[i] && newSentence[i]) {
 						actual = actual.slice(0, i) + newSentence[i] + actual.slice(i+1);

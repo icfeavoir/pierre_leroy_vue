@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+$button-top-transition: -5px;
+
+@keyframes underline {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 30%;
+    }
+}
+
+@keyframes choice-done {
+    0% {
+        top: 0;
+        opacity: 100%;
+        display: auto;
+    }
+    100% {
+        top: -500px;
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes choice-new {
+    0% {
+        top: 0;
+        opacity: 100%;
+        display: auto;
+    }
+    100% {
+        top: 500px;
+        opacity: 0;
+        display: none;
+    }
+}
+
+div.container-choices {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #25A3FF;
+    overflow: hidden;
+}
+
+.choices {
+    text-align: center;
+    padding-top: 25vh;
+    position: relative;
+    &.choice-done {
+        animation: choice-done 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards;  
+    }
+    &.choice-new {
+        animation: choice-new 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards reverse;  
+    }
+    
+    p.question, p#range-value {
+        color: white;
+        font-family: 'Montserrat';
+        font-size: 30px;
+    }
+    .question-underline {
+        width: 30%;
+        margin: 0 auto;
+        height: 1px;
+        border-bottom: 1px solid white;
+        margin-bottom: 50px;
+        animation: underline 1s cubic-bezier(.07,.14,.37,.97) 0s forwards;
+    }
+    .button-choice {
+        width: 10vw;
+        min-width: 150px;
+        max-width: 300px;
+        height: 5vw;
+        min-height: 50px;
+        max-height: 100px;
+        background-color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+        box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.3);
+        margin: 0 5vw 5vw 5vw;
+        cursor: pointer;
+        font: bold 16px 'Montserrat';
+        color: #25A3FF;
+        transition: transform .5s;
+        &:hover {
+            transform: translate(0, $button-top-transition);
+            -webkit-transform: translate(0, $button-top-transition);
+            -moz-transform: translate(0, $button-top-transition);
+            -ms-transform: translate(0, $button-top-transition);
+            -o-transform: translate(0, $button-top-transition);
+        }
+    }
+}
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type="range"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: rgb(230,230,230);
+        width: 500px;
+        height: 15px;
+        border-radius: 10px;
+        outline: none;
+        cursor: pointer;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background-color: #2825ff;
+    }
+}

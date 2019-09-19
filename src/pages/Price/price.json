@@ -1,0 +1,76 @@
+[
+    {
+        "qid": "0",
+        "type": "button",
+        "q": "Quel type de développement ?",
+        "decision": true,
+        "c": [
+            {"text": "Site web", "price": [200,1000]},
+            {"text": "Application mobile", "help": "Application Android uniquement", "price": [1000,2000]}
+        ]
+    },
+    {
+        "qid": "0.1",
+        "type": "button",
+        "q": "Quel type de site web ?",
+        "decision": true,
+        "c": [
+            {"text": "Vitrine", "help": "", "price": [200,500]},
+            {"text": "Dynamique", "help": "", "price": [500,1000]}
+        ]
+    },
+    {
+        "qid": "0.1.*",
+        "type": "slider",
+        "q": "Nombre potentiel de pages ?",
+        "min": 1,
+        "max": 15,
+        "step": 1,
+        "price": 100
+    },
+    {
+        "qid": "0.1.1.1",
+        "type": "button",
+        "q": "Faut-il une page de contact ?",
+        "c": [
+            {"text": "Oui", "help": "Cette page permet aux visiteurs de votre site de vous contacter.", "price": [200,300]},
+            {"text": "Non"}
+        ]
+    },
+    {
+        "qid": "0.1.2.1",
+        "type": "button",
+        "q": "Faut-il une base de données ?",
+        "decision": true,
+        "c": [
+            {"text": "Oui", "help": "Indispensable pour sauvegarder des donéees."},
+            {"text": "Non"}
+        ]
+    },
+    {
+        "qid": "0.1.2.1.1",
+        "type": "slider",
+        "q": "Nombre potentiel de tables ?",
+        "min": 1,
+        "max": 30,
+        "step": 1
+    },
+    {
+        "qid": "0.1.2.1.*",
+        "type": "button",
+        "q": "Faut-il un accès administrateur restreint ?",
+        "c": [
+            {"text": "Oui", "help": ""},
+            {"text": "Non"}
+        ]
+    },
+    {
+        "qid": "0.1.2.1.2",
+        "type": "button",
+        "q": "Faut-il un accès utilisateur ?",
+        "c": [
+            {"text": "Oui", "help": ""},
+            {"text": "Non"}
+        ]
+    }
+]
