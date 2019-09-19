@@ -1,11 +1,9 @@
 <template>
-    <side-parallax :direction=direction class="col-lg-6 col-md-12 text-center">
-        <div class="card-shadow">
-            <div class="shadow-effect"><div class="shape"></div></div>
-            <p class="title">{{ title }}</p><br>
-            <p class="description"><slot></slot></p>
-        </div>
-    </side-parallax>
+    <div class="card-shadow col-lg-6 col-md-12 text-center">
+        <div class="shadow-effect"><div class="shape"></div></div>
+        <p class="title">{{ title }}</p><br>
+        <div class="content"><slot></slot></div>
+    </div>
 </template>
 
 <script>
@@ -13,7 +11,7 @@ import SideParallax from './SideParallax.vue'
 export default {
     name: 'Card',
 	components: {
-		SideParallax
+		// SideParallax
     },
     props: {
         direction: Number,
@@ -25,41 +23,34 @@ export default {
 
 <style lang="scss" scoped>
 .card-shadow {
-    position: relative;
-    display: inline-block;
-    margin: 50px 5%;
-    padding: 0 15px;
-    top: 0px;
-    width: 70%;
-    height: 200px;
     background-color: rgba(255,255,255, 1);
-    overflow: visible;
     
     .title {
         font-size: 30px;
         font-weight: 900;
     }
 
-    .description {
-        font-size: 20px;
-        font-weight: 700;
+    .content {
+        color: black;
+        font-weight: 900;
     }
-}
-.shadow-effect {
-    z-index: -1;
-    position: absolute;
-    content: "";
-    left: 10px;
-    width: calc(100% - 20px);
-    height: 100%;
-    filter:drop-shadow(0 5px 5px rgba(0,0,0,0.8));
     
-    .shape {
-        width: 100%;
+    .shadow-effect {
+        z-index: -1;
+        position: absolute;
+        content: "";
+        left: 10px;
+        width: calc(100% - 20px);
         height: 100%;
-        background: #777;
-        clip-path: polygon(0 0, 50% 10%, 100% 0, 100% 100%, 50% 90%, 0 100%);
-        -webkit-clip-path: polygon(0 0, 50% 10%, 100% 0, 100% 100%, 50% 90%, 0 100%);
+        filter:drop-shadow(0 5px 5px rgba(0,0,0,0.8));
+        
+        .shape {
+            width: 100%;
+            height: 100%;
+            background: #777;
+            clip-path: polygon(0 0, 50% 10%, 100% 0, 100% 100%, 50% 90%, 0 100%);
+            -webkit-clip-path: polygon(0 0, 50% 10%, 100% 0, 100% 100%, 50% 90%, 0 100%);
+        }
     }
 }
 </style>

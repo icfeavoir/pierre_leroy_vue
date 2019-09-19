@@ -1,4 +1,5 @@
 # pierre_leroy
+using VUE CLI
 
 ## Project setup
 ```
