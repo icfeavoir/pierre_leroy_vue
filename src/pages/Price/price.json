@@ -10,7 +10,16 @@
         ]
     },
     {
-        "qid": "0.1",
+        "qid": "0.1.1",
+        "type": "slider",
+        "q": "Nombre potentiel de pages ?",
+        "min": 1,
+        "max": 15,
+        "step": 1,
+        "price": 100
+    },
+    {
+        "qid": "0.1.2",
         "type": "button",
         "q": "Quel type de site web ?",
         "decision": true,
@@ -20,16 +29,7 @@
         ]
     },
     {
-        "qid": "0.1.*",
-        "type": "slider",
-        "q": "Nombre potentiel de pages ?",
-        "min": 1,
-        "max": 15,
-        "step": 1,
-        "price": 100
-    },
-    {
-        "qid": "0.1.1.1",
+        "qid": "0.1.2.1.1",
         "type": "button",
         "q": "Faut-il une page de contact ?",
         "c": [
@@ -38,7 +38,81 @@
         ]
     },
     {
-        "qid": "0.1.2.1",
+        "qid": "0.1.2.2.1",
+        "type": "button",
+        "q": "Faut-il un accès administrateur restreint ?",
+        "c": [
+            {"text": "Oui", "help": "", "price": [500,1500]},
+            {"text": "Non"}
+        ]
+    },
+    {
+        "qid": "0.1.2.2.2",
+        "type": "button",
+        "q": "Faut-il une base de données ?",
+        "decision": true,
+        "c": [
+            {"text": "Oui", "help": "Indispensable pour sauvegarder des donéees.", "price": 500},
+            {"text": "Non"}
+        ]
+    },
+    {
+        "qid": "0.1.2.2.2.1.1",
+        "type": "slider",
+        "q": "Nombre potentiel de tables ?",
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "price": 75
+    },
+    {
+        "qid": "0.1.2.2.2.1.2",
+        "type": "button",
+        "q": "Les utilisateurs doivent pouvoir se connecter ?",
+        "c": [
+            {"text": "Oui", "help": "", "price": 1000},
+            {"text": "Non"}
+        ]
+    },
+
+
+    {
+        "qid": "0.2.1",
+        "type": "button",
+        "q": "Quelle plateforme ?",
+        "c": [
+            {"text": "Android", "help": ""},
+            {"text": "Multi-Plateforme", "help": ""}
+        ]
+    },
+    {
+        "qid": "0.2.2",
+        "type": "slider",
+        "q": "Nombre potentiel de visuels ?",
+        "min": 1,
+        "max": 30,
+        "step": 1
+    },
+    {
+        "qid": "0.2.3",
+        "type": "button",
+        "q": "Besoin d'une API externe ?",
+        "c": [
+            {"text": "Oui", "help": ""},
+            {"text": "Non", "help": ""}
+        ]
+    },
+    {
+        "qid": "0.2.4",
+        "type": "button",
+        "q": "Besoin d'un backend ?",
+        "c": [
+            {"text": "Oui", "help": ""},
+            {"text": "Non", "help": ""}
+        ]
+    },
+    {
+        "qid": "0.2.5",
         "type": "button",
         "q": "Faut-il une base de données ?",
         "decision": true,
@@ -48,7 +122,7 @@
         ]
     },
     {
-        "qid": "0.1.2.1.1",
+        "qid": "0.2.5.1.1",
         "type": "slider",
         "q": "Nombre potentiel de tables ?",
         "min": 1,
@@ -56,18 +130,9 @@
         "step": 1
     },
     {
-        "qid": "0.1.2.1.*",
+        "qid": "0.2.5.1.2",
         "type": "button",
-        "q": "Faut-il un accès administrateur restreint ?",
-        "c": [
-            {"text": "Oui", "help": ""},
-            {"text": "Non"}
-        ]
-    },
-    {
-        "qid": "0.1.2.1.2",
-        "type": "button",
-        "q": "Faut-il un accès utilisateur ?",
+        "q": "Les utilisateurs doivent pouvoir se connecter ?",
         "c": [
             {"text": "Oui", "help": ""},
             {"text": "Non"}

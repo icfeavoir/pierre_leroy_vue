@@ -1,15 +1,7 @@
 module.exports = {
-  baseUrl: '/pierre_leroy/',
-  outputDir: undefined,
-  assetsDir: undefined,
-  runtimeCompiler: undefined,
-  productionSourceMap: undefined,
-  parallel: undefined,
-  css: undefined,
-
   pages: {
     'index': {
-      // entry for the page Home
+      // entry for the page Home  
       entry: 'src/main.js',
       template: 'public/index.html',
       title: 'Test',
@@ -20,14 +12,14 @@ module.exports = {
       entry: 'src/pages/Price/main.js',
       template: 'public/index.html',
       title: 'Test',
-      filename: 'price' // output as dist/*
+      filename: 'price.html' // output as dist/*
     },
   },
   devServer: {
     historyApiFallback: {
       rewrites: [
         { from: /\/index/, to: '/index.html' },
-        { from: /\/price/, to: '/price' }
+        { from: /\/price/, to: '/price.html' }
       ]
     }
   }
