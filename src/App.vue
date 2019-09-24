@@ -7,7 +7,8 @@
 				<div style="display: inline-block; margin-top: -10vh; margin-bottom: 10vh"></div> <!-- Menu scroll -->
 				<div id="me-img-container"><img id="me-img" class="show-img-animation" alt="me" src="./assets/me.jpg" /></div>
 				<p class="name"><b>Pierre LEROY</b></p>
-				<p>{{ age }} ans − Actuellement en 5<sup>ème</sup> année d'ingénieur à l'<a target="_blank" href="https://eseo.fr">ESEO</a> et en alternance à <a target="_blank" href="https://oet.fr">OET</a></p>
+				<!-- <p>{{ age }} ans − </p> -->
+				<p>Autoentrepreneur - Réalisation de sites internet ou applications mobiles. Devis rapide et gratuit ici : <a target="_blank" href="./price">Cliquez moi</a>
 				<div id="svg"><Draw :speed="-1"/></div>
 			</div>
 		</div>
@@ -16,23 +17,27 @@
 
 		<div class="text-center" id="achievments">
 			<div style="margin-top: -10vh; margin-bottom: 10vh"></div> <!-- Menu scroll -->
-            <Card :direction=1 date="Septembre − Novembre 2017" url="https://youpic.com" title="YouPic">
+            <Card :direction=1 date="Septembre 2018 − Septembre 2019" url="https://oet.fr" title="OET">
+				Stage de fin d'étude en alternance (1 année)<br>
+				Conception et réalisation de MES
+			</Card>
+            <Card :direction=-1 date="Septembre − Novembre 2017" url="https://youpic.com" title="YouPic">
 				Stage technique − Développement Web (3 mois)<br>
 				Frontend (React) & backend (MySQL, Kotlin, PHP)
 			</Card>
-            <Card :direction=-1 date="Janvier − Juin 2018" title="Projet SE">
+            <Card :direction=1 date="Janvier − Juin 2018" title="Projet SE">
 				Projet d'école option Systèmes Embarqués<br>
 				Spécification, Conception & Développement Android (Java)
 			</Card>
-            <Card :direction=1 date="2016 − 2018" url="https://seio.org" title="SEIO">
+            <Card :direction=-1 date="2016 − 2018" url="https://seio.org" title="SEIO">
 				DSI de la Junior-Entreprise de l'ESEO<br>
 				Suivi de projet & Développement d'un intranet (PHP, MySQL, JavaScript)
 			</Card>
-            <Card :direction=-1 date="Août 2015" url="https://informatique.e-pro.fr/sarthe/modularis_f785537" title="Modularis">
+            <Card :direction=1 date="Août 2015" url="https://informatique.e-pro.fr/sarthe/modularis_f785537" title="Modularis">
 				Stage de programmation (1 mois)<br>
 				Développement d’un intranet pour la gestion des SAV (HTML, CSS, JS, PHP)
 			</Card>
-            <Card :direction=0 date="Été 2012 à 2018" url="https://actu.fr/pays-de-la-loire/sille-le-guillaume_72334/saint-germain-de-coulamer-le-centre-de-loisirs-fete-ses-30-ans_10433330.html" title="Centre Aéré">
+            <Card :direction=-1 date="Été 2012 à 2018" url="https://actu.fr/pays-de-la-loire/sille-le-guillaume_72334/saint-germain-de-coulamer-le-centre-de-loisirs-fete-ses-30-ans_10433330.html" title="Centre Aéré">
 				Animateur en centre aéré
 			</Card>
 		</div>
@@ -54,12 +59,12 @@
 			</div>
 		</b-g-parallax>
 
-		<div class="full" id="about">
+		<!-- <div class="full" id="about">
 			<div id="about-shape">
 				<p class="title">Loisirs</p>
 				
 				<card-shadow :direction=1 title="Football">
-					<gif />
+					<gif url="soccer.webp" />
 				</card-shadow>
 			</div>
 		</div>
@@ -67,7 +72,7 @@
 		<b-g-parallax id="contact-split" url="contact.jpg" title="Contact" credit="Photo by Marko Pekić on Unsplash" />
 
 		<div class="full" id="contact">
-		</div>
+		</div> -->
 
     </div>
 
@@ -96,9 +101,9 @@ export default {
 		Gif,
 	},
 	mounted() {
-		// new Parallax($('#balls').get(0), {
-		// 	hoverOnly: false,
-		// });
+		new Parallax($('#balls').get(0), {
+			hoverOnly: false,
+		});
 		this.msg = this.lang[this.selected];
 	},
 	data() {

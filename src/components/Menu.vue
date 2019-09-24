@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <a class="menu-choice"  href="#main">
-                <div class="little-btn active"></div><span class="menu-text">Pierre Leroy</span>
+                <div class="little-btn active"></div><span class="menu-text">Top</span>
                 </a>
             </li>
             <li>
@@ -16,7 +16,7 @@
                 <div class="little-btn"></div><span class="menu-text">Compétences</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a class="menu-choice"  href="#about">
                 <div class="little-btn"></div><span class="menu-text">À Propos</span>
                 </a>
@@ -25,7 +25,7 @@
                 <a class="menu-choice"  href="#contact">
                 <div class="little-btn"></div><span class="menu-text">Contact</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </div>
 </template>

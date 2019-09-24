@@ -16,7 +16,7 @@ export default {
     },
     computed: {
         gif: function() {
-            return require('../assets/gif/' + this.url + '.webp');
+            return require('../assets/gif/' + this.url);
         }
     },
     methods: {

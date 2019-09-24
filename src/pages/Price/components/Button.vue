@@ -1,5 +1,5 @@
 <template>
-    <button class="button-choice" :attr-id="id" :title="help" >{{ text }}</button>
+    <button class="button-choice" :attr-id="id" :title="help" ><slot></slot></button>
 </template>
 
 <script>
@@ -7,7 +7,6 @@ export default {
     name: 'Button',
     props: {
         id: String,
-        text: String,
         help: String,
     },
     data() {

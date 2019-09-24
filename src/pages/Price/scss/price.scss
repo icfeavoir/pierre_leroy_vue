@@ -40,6 +40,12 @@ div.big-container {
     background: #25A3FF;
     overflow: hidden;
     text-align: center;
+
+    &.total {
+        min-height: 100vh;
+        height: auto;
+        overflow: initial;
+    }
     
     div.vertical-center {
         position: relative;
@@ -52,11 +58,11 @@ div.big-container {
     text-align: center;
     position: relative;
 
-    &.choice-done {
-        animation: choice-done 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards;  
-    }
     &.choice-new {
         animation: choice-new 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards reverse;
+    }
+    &.choice-done {
+        animation: choice-done 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards;  
     }
     
     p.question, p#range-value {
@@ -64,15 +70,16 @@ div.big-container {
         font-family: 'Montserrat';
         font-size: 30px;
     }
-    .question-underline {
-        width: 30%;
-        margin: 0 auto;
-        height: 1px;
-        border-bottom: 1px solid white;
-        margin-bottom: 50px;
-        animation: underline 1s cubic-bezier(.07,.14,.37,.97) 0s forwards;
-    }
 }
+.question-underline {
+    width: 30%;
+    margin: 0 auto;
+    height: 1px;
+    border-bottom: 1px solid white;
+    margin-bottom: 50px;
+    animation: underline 1s cubic-bezier(.07,.14,.37,.97) 0s forwards;
+}
+
 .button-choice {
     width: 10vw;
     min-width: 150px;
@@ -103,6 +110,9 @@ div.big-container {
 div.final {
     &.final-new {
         animation: choice-new 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards reverse;
+    }
+    &.final-done {
+        animation: choice-done 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards;  
     }
 
     p {
@@ -140,6 +150,56 @@ div.progress-bar {
         background-color: #4CAF50;
         color: white;
         font-family: 'Montserrat';
+    }
+}
+
+div.request {
+    text-align: left;
+    margin: 0 10%;
+
+    &.request-new {
+        animation: choice-new 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards reverse;
+    }
+    &.request-done {
+        animation: choice-done 1s cubic-bezier(.4,-0.14,.99,-0.19) 0s forwards;  
+    }
+
+    p {
+        color: white;
+        font-family: 'Montserrat';
+        font-size: 25px;
+        @media (max-width: 640px) {
+            font-size: 15px;
+        }
+
+        margin-top: 50px;
+
+        &.error-form {
+            margin-top: 0;
+            color: #BA2424;
+            font-size: 20px;
+        }
+    }
+
+    .input-bloc {
+        margin-bottom: 15px;
+        
+        label {
+            color: white;
+            font-family: 'Montserrat';
+            font-size: 20px;
+            height: 0;
+        }
+        input, textarea {
+            padding: 5px 5px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+        }
+    }
+
+    button {
+        margin-top: 20px;
     }
 }
 

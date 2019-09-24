@@ -11,7 +11,9 @@
 						<Range :min="range.min" :max="range.max" :step="range.step" v-model="rangeValue" v-on:range-changed="rangeChanged"/>
 					</span>
 					<span  v-for="(button, index) in buttons" :key="'button-' + index">
-						<Button :id="button.id" :text="button.text" :help="button.help" v-on:click.native="buttonClicked(button.id, button.price, button.num, button.back || false)" />
+						<Button :id="button.id" :help="button.help" v-on:click.native="buttonClicked(button.id, button.price, button.num, button.back || false)">
+							<span v-html="button.text"></span>
+						</Button>
 					</span>
 				</div>
 			</div>
@@ -19,11 +21,33 @@
 			<!-- <p class="devis">Votre devis est compris entre {{ this.priceMin }} et {{ this.priceMax }}</p> -->
 		</div>
 
-		<div class="big-container" v-else>
-			<div class="vertical-center final">
+		<div class="big-container" v-if="questionsDone && !sendPriceRequest">
+			<div class="vertical-center final final-new">
 				<p>Votre devis est compris entre {{ this.priceMin }}€ et {{ this.priceMax }}€</p>
-				<button class="button-choice" v-on:click="restart()">Recommencer</button>
-				<button class="button-choice" v-on:click="send()">Envoyer la demande de devis</button>
+				<button class="button-choice" v-on:click="restart()"><i class="fa fa-undo"></i> Recommencer</button>
+				<button class="button-choice" v-on:click="send()"><i class="fa fa-paper-plane"></i> Envoyer la demande de devis</button>
+			</div>
+		</div>
+
+		<div class="big-container total" v-if="sendPriceRequest">
+			<div class="request request-new row">
+				<div class="col-lg-12">
+					<p>Les informations que vous avez saisies sont enregistrées. Merci de remplir les informations ci-dessous et de les accompagner d'un message expliquant plus en détail votre projet.</p><br>
+				</div>
+				<div class="col-lg-6">
+					<div class="input-bloc"><label>Prénom</label><br><input name="firstName" v-model="firstName" required placeholder="Prénom" /></div>
+					<div class="input-bloc"><label>Nom</label><br><input name="lastName" v-model="lastName" required placeholder="Nom" /></div>
+					<div class="input-bloc"><label>Email</label><br><input name="mail" v-model="email" required placeholder="Email" /></div>
+				</div>
+				<div class="col-lg-6">
+					<div class="input-bloc"><label>Votre message</label><br><textarea rows="8" class="msg" v-model="userMsg"></textarea></div>
+				</div>
+				
+				<div class="col-lg-12 text-center">
+					<p v-if="errorForm != null" class="error-form">{{ errorForm }}</p>
+					<button class="button-choice" v-on:click="restart()"><i class="fa fa-undo"></i> Recommencer</button>
+					<button class="button-choice" type="submit" v-on:click="realSend()"><i class="fa fa-paper-plane"></i> Envoyer</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -34,6 +58,7 @@
 import Button from './components/Button.vue'
 import Range from './components/Range.vue'
 import data from './price.json'
+import axios from "axios"
 
 const TIME = 1200
 
@@ -53,7 +78,7 @@ export default {
 			currentQuestion: "0",
 			prevQuestions: [],
 			question: '',
-			backButton: {id:"-1", text: "Back", price: 0, back: true},
+			backButton: {id:"-1", text: "<i class='fa fa-undo'></i> Retour", price: 0, back: true},
 			buttons: [],
 			ranges: [],
 			priceMin: 0,
@@ -62,6 +87,13 @@ export default {
 			currentPercent: 0,
 			rangeValue: 0,
 			questionToAnswer: {},
+			sendPriceRequest: false,
+
+			firstName: "e",
+			lastName: "e",
+			email: "pierre@gmail.com",
+			userMsg: "e",
+			errorForm: null,
 		}
 		
 	},
@@ -242,7 +274,6 @@ export default {
 				setTimeout(() => {
 					this.buttons = []
 					this.ranges = []
-					$("div.final").addClass("final-new") 
 					this.questionsDone = true
 				}, TIME);
 			}
@@ -262,12 +293,9 @@ export default {
 			this.questionsDone = false
 			this.doneQuestions = {}
 			this.questionToAnswer = {}
+			this.sendPriceRequest = false
 			this.setPercent(0)
 			this.nextChoice(this.currentQuestion)
-		},
-
-		send: function() {
-			alert('send')
 		},
 
 		setPercent: function(directValue = null) {
@@ -310,6 +338,65 @@ export default {
 			}
 		},
 
+		send: function() {
+			$(".final").removeClass("final-new")
+			$(".final").addClass("final-done")
+			setTimeout(() => this.sendPriceRequest = true, TIME)
+		},
+
+		realSend: function() {
+			var summary = ""
+			for (var qid in this.questionToAnswer) {
+				var resNum = this.questionToAnswer[qid]
+				var question = this.data.filter(q => q.qid == qid)[0]
+				if (question && question.qid) {	// si on a trouvé la question
+					summary += question.q + ": "
+					if (question.type == "buton") {
+						summary += question.c[resNum].text + "\n"
+					} else {
+						// range
+						summary += resNum + "\n"
+					}
+				}
+			}
+
+			// verif des champs
+			var fields = ["Prénom", "Nom", "Email", "Message"]
+			var fieldsVar = [this.firstName, this.lastName, this.email, this.msg]
+			for (var i in fieldsVar) {
+				if (fieldsVar[i] === "") {
+					this.errorForm = "Veuillez saisir le champ " + fields[i]
+					return
+				}
+			}
+
+			// verif email
+			if (!this.validateEmail(this.email)) {
+				this.errorForm = "Email invalide"
+				return
+			}
+
+			this.errorForm = ""
+			
+			var data = {
+				firstName: this.firstName,
+				lastName: this.lastName,
+				email: this.email,
+				msg: this.userMsg,
+			}
+			console.log(data)
+
+			mg.messages.create('localhost', {
+				from: "Test User <do-not-reply@pierre-leroy.fr>",
+				to: ["pierre.leroy.mail@gmail.com"],
+				subject: "Test",
+				text: "Testing some Mailgun awesomness!",
+				html: "<h1>Testing some Mailgun awesomness!</h1>"
+			})
+			.then(msg => console.log(msg)) // logs response data
+			.catch(err => console.log(err)); // logs any error
+		},
+
 		removeLastNum: function(id) {
 			var list = id.split(".")
 			list.pop()
@@ -320,6 +407,11 @@ export default {
 			var list = id.split(".")
 			return list[list.length - 1]
 		},
+
+		validateEmail: function(email) {
+			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return re.test(String(email).toLowerCase());
+		}
 	}
 }
 
