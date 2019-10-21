@@ -1,6 +1,10 @@
 module.exports = {
   baseUrl: '',
 
+  devServer: {
+    proxy: 'https://pierre-leroy.fr/mail',
+  },
+
   pages: {
     'index': {
       // entry for the page Home  

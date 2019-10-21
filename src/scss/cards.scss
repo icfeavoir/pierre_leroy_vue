@@ -15,6 +15,11 @@ $open-card-height: 220px;
     transition: max-height 0.5s, background-color 0.5s;
     -webkit-transition: max-height 0.5s, background-color 0.5s;
     
+    @media only screen and (max-width: 700px) {
+        height: initial;
+        max-height: initial;
+    }
+    
     &::before, &::after {
         box-sizing: inherit;
         content: '';
@@ -35,6 +40,9 @@ $open-card-height: 220px;
     }
     &:hover {
         max-height: $open-card-height;
+        @media only screen and (max-width: 700px) {
+            max-height: initial;
+        }
     }
     &::after {
         top: 0;
@@ -67,6 +75,10 @@ $open-card-height: 220px;
         letter-spacing: 2px;
         color: #fff;
         position: relative;
+
+        @media only screen and (max-width: 700px) {
+            letter-spacing: initial;
+        }
         
         .parcours-hr {
             margin: 20px auto !important;
@@ -77,15 +89,28 @@ $open-card-height: 220px;
         .parcours-desc {
             color: #ddd;
             padding: 0 2%;
+            font-size: medium;
             position: absolute;
             left: 0;
             right: 0;
             bottom: 0;
-            font-size: medium;
             visibility: hidden;
             opacity: 0;
             transition: visibility 0s, opacity 1s;
             -webkit-transition: visibility 0s, opacity 1s;
+
+            @media only screen and (max-width: 700px) {
+                position: initial;
+                left: initial;
+                right: initial;
+                bottom: initial;
+                visibility: initial;
+                opacity: initial;
+                transition: initial;
+                -webkit-transition: initial;
+                
+                text-align: justify;
+            }
         }
         &:hover{
             background-color: #222;
@@ -102,12 +127,3 @@ $open-card-height: 220px;
 a:hover {
     text-decoration: none;
 }
-
-@media (max-width: 770px) {
-    /* each parcours bloc in a single row --> no animation*/
-    .meet {
-        max-height: calc(100% + 50px);
-    } 
-}
-
-/*# sourceMappingURL=sass.css.map */

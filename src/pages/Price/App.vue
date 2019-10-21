@@ -3,7 +3,6 @@
 	<div>
 		<div class="big-container container-choices" v-if="!questionsDone">
 			<div class="vertical-center choices">
-				<!-- <Button :id=1 text="fes" /> -->
 				<p class="question">{{ question }}</p>
 				<div class="question-underline-off"></div>
 				<div class="choices-buttons">
@@ -18,14 +17,13 @@
 				</div>
 			</div>
 			<div class="progress-bar"><div class="progress-bar-filled" :style="{'width': currentPercent + '%'}">{{ currentPercent }}%</div></div>
-			<!-- <p class="devis">Votre devis est compris entre {{ this.priceMin }} et {{ this.priceMax }}</p> -->
 		</div>
 
-		<div class="big-container" v-if="questionsDone && !sendPriceRequest">
+		<div class="big-container" v-if="showPrices">
 			<div class="vertical-center final final-new">
 				<p>Votre devis est compris entre {{ this.priceMin }}€ et {{ this.priceMax }}€</p>
 				<button class="button-choice" v-on:click="restart()"><i class="fa fa-undo"></i> Recommencer</button>
-				<button class="button-choice" v-on:click="send()"><i class="fa fa-paper-plane"></i> Envoyer la demande de devis</button>
+				<button class="button-choice" v-on:click="goToSendForm()"><i class="fa fa-paper-plane"></i> Envoyer la demande de devis</button>
 			</div>
 		</div>
 
@@ -45,8 +43,17 @@
 				
 				<div class="col-lg-12 text-center">
 					<p v-if="errorForm != null" class="error-form">{{ errorForm }}</p>
-					<button class="button-choice" v-on:click="restart()"><i class="fa fa-undo"></i> Recommencer</button>
-					<button class="button-choice" type="submit" v-on:click="realSend()"><i class="fa fa-paper-plane"></i> Envoyer</button>
+					<button class="button-choice" v-on:click="restart()" :disabled="buttonSendDisable"><i class="fa fa-undo"></i> Recommencer</button>
+					<button class="button-choice" type="submit" :disabled="buttonSendDisable"  v-on:click="sendForm()"><i class="fa fa-paper-plane"></i> {{ buttonSendText }}</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="big-container" v-if="sendSucceed">
+			<div class="vertical-center request text-center">
+				<div class="col-lg-12">
+					<p>Devis envoyé avec succès, nous vous répondrons sous les meilleurs délais.</p>
+					<a href="/"><button class="button-choice">Retour sur le site</button></a>
 				</div>
 			</div>
 		</div>
@@ -83,16 +90,22 @@ export default {
 			ranges: [],
 			priceMin: 0,
 			priceMax: 0,
-			questionsDone: false,
 			currentPercent: 0,
 			rangeValue: 0,
 			questionToAnswer: {},
-			sendPriceRequest: false,
 
-			firstName: "e",
-			lastName: "e",
-			email: "pierre@gmail.com",
-			userMsg: "e",
+			questionsDone: false,		// les questions
+			showPrices: false,			// affichage du prix final
+			sendPriceRequest: false,	// affichage du formulaire
+			sendSucceed: false,			// affichage final
+
+			buttonSendDisable: false,
+			buttonSendText: 'Envoyer',
+
+			firstName: "test",
+			lastName: "test",
+			email: "test@t.fr",
+			userMsg: "test",
 			errorForm: null,
 		}
 		
@@ -275,6 +288,7 @@ export default {
 					this.buttons = []
 					this.ranges = []
 					this.questionsDone = true
+					this.showPrices = true
 				}, TIME);
 			}
 		},
@@ -290,10 +304,17 @@ export default {
 			this.priceMin = 0
 			this.priceMax = 0
 			this.rangeValue = 0
-			this.questionsDone = false
 			this.doneQuestions = {}
 			this.questionToAnswer = {}
-			this.sendPriceRequest = false
+
+			this.questionsDone = false		// les questions
+			this.showPrices = false			// affichage du prix final
+			this.sendPriceRequest = false	// affichage du formulaire
+			this.sendSucceed = false			// affichage final
+
+			this.buttonSendDisable = false
+			this.buttonSendText = 'Envoyer'
+
 			this.setPercent(0)
 			this.nextChoice(this.currentQuestion)
 		},
@@ -338,13 +359,20 @@ export default {
 			}
 		},
 
-		send: function() {
+		goToSendForm: function() {
 			$(".final").removeClass("final-new")
 			$(".final").addClass("final-done")
-			setTimeout(() => this.sendPriceRequest = true, TIME)
+			setTimeout(() => {
+				this.showPrices = false
+				this.sendPriceRequest = true
+			}, TIME)
 		},
 
-		realSend: function() {
+		sendForm: function() {
+			// on bloque le bouton d'envoie en attendant qu'il s'envoie
+			this.buttonSendDisable = true
+			this.buttonSendText = "Envoi..."
+
 			var summary = ""
 			for (var qid in this.questionToAnswer) {
 				var resNum = this.questionToAnswer[qid]
@@ -384,17 +412,79 @@ export default {
 				email: this.email,
 				msg: this.userMsg,
 			}
-			console.log(data)
 
-			mg.messages.create('localhost', {
-				from: "Test User <do-not-reply@pierre-leroy.fr>",
-				to: ["pierre.leroy.mail@gmail.com"],
-				subject: "Test",
-				text: "Testing some Mailgun awesomness!",
-				html: "<h1>Testing some Mailgun awesomness!</h1>"
+			// html with css in mail
+			var msg = "Une nouvelle demande de devis a été envoyée par <b>" + data.firstName + " " + data.lastName + "</b>.<br>"
+			msg += "Les choix de cette personne : <br><br>"
+			msg += "<table style='margin: 10px; width: 80%; border: 1px solid black; border-collapse: collapse; text-align: center'>"
+				msg += "<tr>"
+					msg += "<th style='background-color: navy; color: white; padding: 15px; border: 1px solid black; border-collapse: collapse;'>Question</th>"
+					msg += "<th style='background-color: navy; color: white; padding: 15px; border: 1px solid black; border-collapse: collapse;'>Réponse</th>"
+					msg += "<th style='background-color: navy; color: white; padding: 15px; border: 1px solid black; border-collapse: collapse;'>Prix min</th>"
+					msg += "<th style='background-color: navy; color: white; padding: 15px; border: 1px solid black; border-collapse: collapse;'>Prix max</th>"
+				msg += "</tr>"
+
+			for (var i in this.questionToAnswer) {
+				var question = this.getQuestionById(i)
+				var response = this.questionToAnswer[i]
+				var responsePrice = [0, 0]
+				
+				if (question.type === "slider") {
+					var qPrice = question.price || 0
+					responsePrice[0] += response * qPrice
+					responsePrice[1] += response * qPrice
+				} else {
+					var qPrice = question.c[response].price || 0
+					if (Array.isArray(qPrice) && qPrice.length == 2) {
+						responsePrice[0] += qPrice[0]
+						responsePrice[1] += qPrice[1]
+					} else if (typeof price === 'number'){
+						responsePrice[0] += qPrice
+						responsePrice[1] += qPrice
+					}
+					response = question.c[response].text
+				}
+
+				msg += "<tr>"
+					msg += "<td style='padding: 15px; border: 1px solid black; border-collapse: collapse;'>" + question.q + "</td>"
+					msg += "<td style='padding: 15px; border: 1px solid black; border-collapse: collapse;'>" + response + "</td>"
+					msg += "<td style='padding: 15px; border: 1px solid black; border-collapse: collapse;'>" + responsePrice[0] + "</td>"
+					msg += "<td style='padding: 15px; border: 1px solid black; border-collapse: collapse;'>" + responsePrice[1] + "</td>"
+				msg += "</tr>"
+			}
+
+			msg += "<tr>"
+				msg += "<td colspan=2 style='background-color: dodgerblue; color: white; padding: 15px; border: 1px solid black; border-collapse: collapse;'>Prix total</td>"
+				msg += "<td style='background-color: dodgerblue; color: white; padding: 15px; border: 1px solid black; border-collapse: collapse;'>" + this.priceMin + "</td>"
+				msg += "<td style='background-color: dodgerblue; color: white; padding: 15px; border: 1px solid black; border-collapse: collapse;'>" + this.priceMax + "</td>"
+			msg += "</tr>"
+
+			msg += "</table>"
+
+			msg += "<br>Le contact : <b>" + data.firstName + " " + data.lastName+"</b> - <a href=mailto:" + data.email + ">" + data.email + "</a><br><br>"
+
+			msg += "Message du contact :<br><i>" + data.msg + "</i><br><br>"
+
+			msg += "<b>Pierre & Kévin.</b>"
+
+			var params = {
+				fromMail: "do-not-reply@mail.com",
+				fromName: "Pierre & Kévin",
+				toMail: ["pierre.leroy.mail@gmail.com", "kevin.pottier@orange.fr"],
+				toName: ["Pierre Le Boss", "Kévin Le Boss"],
+				subject: "Nouvelle demande de devis !!!",
+				body: msg,
+			}
+
+			const it = this
+			$.post("http://mailer.pierre-leroy.fr", params, function(e) {
+				if (e === "1") {
+					it.sendPriceRequest = false
+					it.sendSucceed = true
+				} else {
+					alert('Une erreur est survenue, merci de réessayer plus tard.')
+				}
 			})
-			.then(msg => console.log(msg)) // logs response data
-			.catch(err => console.log(err)); // logs any error
 		},
 
 		removeLastNum: function(id) {

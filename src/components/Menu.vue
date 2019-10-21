@@ -158,7 +158,7 @@ export default {
   opacity: 0;
   transition: opacity .5s;
   @media (orientation: portrait) {
-    opacity: 1;
+    opacity: 0;
     width: 100%;
     margin-top: 0;
     padding: 0;
