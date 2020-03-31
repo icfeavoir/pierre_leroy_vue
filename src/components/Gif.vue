@@ -1,6 +1,6 @@
 <template>
     <div class="gif-container">
-        <img :src="gif" />
+        <img :src="gif" v-bind:style="{width: size + '%'}">
     </div>
 </template>
 
@@ -9,9 +9,11 @@ export default {
     name: 'Gif',
     props: {
         url: String,
+        size: Number,
     },
     data() {
         return {
+            size: 100,
         };
     },
     computed: {
@@ -27,11 +29,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .gif-container {
-        height: 50%;
-
-        img {
-            height: 100%;
-        }
-    }
 </style>

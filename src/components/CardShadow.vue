@@ -1,17 +1,15 @@
 <template>
-    <div class="card-shadow col-lg-6 col-md-12 text-center">
+    <div class="card-shadow text-center">
         <div class="shadow-effect"><div class="shape"></div></div>
-        <p class="title">{{ title }}</p><br>
+        <p class="title">{{ title }}</p>
         <div class="content"><slot></slot></div>
     </div>
 </template>
 
 <script>
-import SideParallax from './SideParallax.vue'
 export default {
     name: 'Card',
 	components: {
-		// SideParallax
     },
     props: {
         direction: Number,
@@ -24,6 +22,30 @@ export default {
 <style lang="scss" scoped>
 .card-shadow {
     background-color: rgba(255,255,255, 1);
+    margin: 10px 10px;
+    padding: 0 20px 10px;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    vertical-align: top;
+
+    -ms-flex: 0 0 30%;
+    flex: 0 0 30%;
+    max-width: 30%;
+
+    @media only screen and (max-width: 1000px) {
+        -ms-flex: 0 0 40%;
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+
+    @media only screen and (max-width: 700px) {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin: 10px 0;
+    }
     
     .title {
         font-size: 30px;
