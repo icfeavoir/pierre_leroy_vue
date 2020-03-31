@@ -74,9 +74,9 @@
 		<div class="full" id="about">
 			<div id="about-shape">
 				<p class="title" id="about-start">Loisirs</p>
-				<card-shadow :direction=1 title="Football"><p>Joueur en club amateur</p><gif size="50" url="soccer.webp" /></card-shadow>
-				<card-shadow :direction=1 title="Théâtre"><p class="text-justify">Membre d'une association de théâtre pendant 8 ans dont 3 ans de présidence. Écriture, mise en scène et représentations annuelles par une vingtaine de personnes ayant entre 15 et 25 ans.</p><gif size="50" url="theater.gif" /></card-shadow>
-				<card-shadow :direction=1 title="Développement"><p>Développement informatique depuis mes 14 ans.</p><gif size="50" url="dev.webp" /></card-shadow>
+				<card-shadow :direction=1 title="Football"><p>Joueur en club amateur</p><gif :size=50 url="soccer.webp" /></card-shadow>
+				<card-shadow :direction=1 title="Théâtre"><p class="text-justify">Membre d'une association de théâtre pendant 8 ans dont 3 ans de présidence. Écriture, mise en scène et représentations annuelles par une vingtaine de personnes ayant entre 15 et 25 ans.</p><gif :size=50 url="theater.gif" /></card-shadow>
+				<card-shadow :direction=1 title="Développement"><p>Développement informatique depuis mes 14 ans.</p><gif :size=50 url="dev.webp" /></card-shadow>
 			</div>
 		</div>
 <!-- 

@@ -13,7 +13,6 @@ export default {
     },
     data() {
         return {
-            size: 100,
         };
     },
     computed: {
