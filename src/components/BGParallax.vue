@@ -59,6 +59,12 @@ export default {
         .title {
             font-size: 50px;
             letter-spacing: 7px;
+
+            @media only screen and (max-width: 700px) {
+                font-size: 35px;
+                letter-spacing: 2px;
+            }
+
             color: white;
             text-shadow: 2px 0 0 grey, -2px 0 0 grey, 
                         0 2px 0 grey, 0 -2px 0 grey, 

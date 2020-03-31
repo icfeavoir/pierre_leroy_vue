@@ -37,7 +37,7 @@ export default {
       return -1 * (0.4 + Math.random() * 3);
     },
     realSize: function() {
-      return parseInt(this.size) * this.propor / 250;
+      return parseInt(this.size) * this.propor / 250 * 1 / this.landscape;
     },
     realX: function() {
       return this.posX * this.width / 100;
@@ -54,6 +54,7 @@ export default {
       this.width = $("#balls").width();
       this.height = $("#balls").height();
       this.propor = Math.min(this.width, this.height);
+      this.landscape = this.width > this.height ? 1 : 1.5
     },
   },
   mounted() {

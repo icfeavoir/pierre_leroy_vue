@@ -138,7 +138,7 @@ export default {
   text-align: left;
   @media (orientation: portrait) {
     display: inline-block;
-    width: 30%;
+    width: 20%;
     height: 100%;
     text-align: center;
   }
@@ -157,6 +157,7 @@ export default {
     width: 100%;
     margin-top: 0;
     padding: 0;
+    font-size: 12px;
   }
 }
 

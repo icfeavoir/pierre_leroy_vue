@@ -65,6 +65,10 @@ $triangle-size: 6vh;
     .contact-all-data {
         .contact-data {
             width: 49%;
+            @media only screen and (max-width: 700px) {
+                width: 100%;
+            }
+            
             display: inline-block;
             p {
                 color: navy;
@@ -77,10 +81,18 @@ $triangle-size: 6vh;
         & p.contact-data:nth-of-type(1) {
             text-align: right;
             margin-right: 1%;
+            @media only screen and (max-width: 700px) {
+                text-align: center;
+                margin: 0;
+            }
         }
         & p.contact-data:nth-of-type(2) {
             text-align: left;
             margin-left: 1%;
+            @media only screen and (max-width: 700px) {
+                text-align: center;
+                margin: 0;
+            }
         }
     }
 }
@@ -111,7 +123,7 @@ $triangle-size: 6vh;
 
 #about {
     z-index: 2;
-    height: calc(100vh + #{$triangle-size});
+    height: fit-content;
     filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.8)) drop-shadow(0 5px 5px rgba(0,0,0,0.8));
     background-color: transparent;
     margin-top: -$triangle-size;
@@ -119,16 +131,16 @@ $triangle-size: 6vh;
     .title {
         font-size: 45px;
         margin-top: $triangle-size;
+        padding-top: $triangle-size;
         color: white;
     }
 
     #about-shape {
         background-color: rgb(100, 150, 200);
         text-align: center;
-        overflow: auto;
-        height: calc(100% + #{$triangle-size});
+        min-height: calc(100% + #{$triangle-size});
+        margin-top: -6vh;
         padding-bottom: 100px;
-        min-height: 470px;
         clip-path: polygon(
             0 $triangle-size,
             33% 0,

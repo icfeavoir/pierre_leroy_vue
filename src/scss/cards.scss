@@ -5,6 +5,9 @@ $open-card-height: 220px;
     border: 0;
     box-sizing: border-box;
     padding: 1em 2em;
+    @media only screen and (max-width: 700px) {
+        padding: 1em 0;
+    }
     box-shadow: inset 0 0 0 1px #0c5860;
     font-size: inherit;
     font-weight: 700;
@@ -78,6 +81,7 @@ $open-card-height: 220px;
 
         @media only screen and (max-width: 700px) {
             letter-spacing: initial;
+            line-height: initial;
         }
         
         .parcours-hr {
@@ -109,7 +113,7 @@ $open-card-height: 220px;
                 transition: initial;
                 -webkit-transition: initial;
                 
-                text-align: justify;
+                text-align: left;
             }
         }
         &:hover{
