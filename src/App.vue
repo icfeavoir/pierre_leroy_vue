@@ -7,11 +7,14 @@
 				<div style="display: inline-block; margin-top: -10vh; margin-bottom: 10vh"></div> <!-- Menu scroll -->
 				<div id="me-img-container"><img id="me-img" class="show-img-animation" alt="me" src="./assets/me.jpg" /></div>
 				<p class="name"><b>Pierre LEROY</b></p>
-				<p>{{ age }} ans − À la recherche d'opportunités en développement à Rennes.</p>
+				<p>{{ age }} ans</p>
+				<p>Diplômé de l'<a target="_blank" href="https://eseo.fr/">ESEO</a> − Grande École d'Ingénieurs Généralistes à Angers</p>
+				<p>À la recherche d'opportunités en développement à Rennes.</p>
 
 				<div class="contact-all-data">
-					<p class="contact-data"><i class='fa fa-phone'></i><a href="phone">0648444512</a></p>
-					<p class="contact-data"><i class='fa fa-envelope'></i><a href="mailto:'pierre.leroy.mail@gmail.com'">pierre.leroy.mail@gmail.com</a></p>
+					<p class="contact-data"><i class='fa fa-phone'></i><a target="_blank" href="phone">0648444512</a></p>
+					<p class="contact-data"><i class='fa fa-envelope'></i><a target="_blank" href="mailto:'pierre.leroy.mail@gmail.com'">pierre.leroy.mail@gmail.com</a></p>
+					<p class="contact-data"><i class='fa fa-github-square'></i><a target="_blank" href="https://github.com/icfeavoir">Mon GitHub</a></p>
 				</div>
 				<div id="svg"><Draw :speed="-1"/></div>
 			</div>
@@ -56,10 +59,10 @@
 				<Ball text="HTML" size=80 textColor="white" bgColor="#F06529" posX=10 posY=10 />
 				<Ball text="CSS" size=60 textColor="white" bgColor="#264de4" posX=12 posY=40 />
 				<Ball text="JS" size=65 textColor="#35495e" bgColor="#f7df1e" posX=28 posY=70 />
-				<Ball text="NodeJS" size=50 textColor="white" bgColor="#215732" posX=20 posY=80 />
+				<Ball text="NodeJS" size=55 textColor="white" bgColor="#215732" posX=20 posY=80 />
 				<Ball text="Vue.js" size=50 textColor="#35495e" bgColor="#41b883" posX=23 posY=55 />
 				<Ball text="PHP" size=85 textColor="white" bgColor="#4f5b93" posX=40 posY=10 />
-				<Ball text="Laravel" size=80 textColor="white" bgColor="#ff4b26" posX=38 posY=50 />
+				<Ball text="Laravel" size=75 textColor="white" bgColor="#ff4b26" posX=38 posY=50 />
 
 				<Ball text="SQL" size=60 textColor="white" bgColor="#00758f" posX=50 posY=75 />
 				<Ball text="Python" size=40 textColor="#4584b6" bgColor="#ffde57" posX=62 posY=10 />
@@ -74,9 +77,9 @@
 		<div class="full" id="about">
 			<div id="about-shape">
 				<p class="title" id="about-start">Loisirs</p>
-				<card-shadow :direction=1 title="Football"><p>Joueur en club amateur</p><gif :size=50 url="soccer.webp" /></card-shadow>
-				<card-shadow :direction=1 title="Théâtre"><p class="text-justify">Membre d'une association de théâtre pendant 8 ans dont 3 ans de présidence. Écriture, mise en scène et représentations annuelles par une vingtaine de personnes ayant entre 15 et 25 ans.</p><gif :size=50 url="theater.gif" /></card-shadow>
-				<card-shadow :direction=1 title="Développement"><p>Développement informatique depuis mes 14 ans.</p><gif :size=50 url="dev.webp" /></card-shadow>
+				<card-shadow :direction=1 title="Football"><p>Joueur en club amateur</p><gif url="soccer.webp" /></card-shadow>
+				<card-shadow :direction=1 title="Théâtre"><p class="text-justify">Membre d'une association de théâtre pendant 8 ans dont 3 ans de présidence. Écriture, mise en scène et représentations annuelles par une vingtaine de personnes ayant entre 15 et 25 ans.</p><gif url="theater.gif" /></card-shadow>
+				<card-shadow :direction=1 title="Développement"><p>Développement informatique depuis mes 14 ans</p><gif url="dev.webp" /></card-shadow>
 			</div>
 		</div>
 <!-- 

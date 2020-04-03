@@ -44,12 +44,21 @@ export default {
 <style lang="scss" scoped>
 	.bg-parallax {
         position: relative;
-        background: black;
+        background-color: black;
         background-size: 100vw auto;
-        -webkit-background-size: 100 vw auto;
-        -moz-background-size: 100 vw auto;
-        -o-background-size: 100 vw auto;
+        -webkit-background-size: 100vw auto;
+        -moz-background-size: 100vw auto;
+        -o-background-size: 100vw auto;
         max-height: 60vh;
+
+        @media (orientation: portrait) {
+            background-size: auto 100vh;
+            -webkit-background-size: auto 100vh;
+            -moz-background-size: auto 100vh;
+            -o-background-size: auto 100vh;
+            background-position: left;  // mieux pour voir l'image comme voulue !
+            max-height: none;
+        }
 
 		/* Create the parallax scrolling effect */
 		background-attachment: fixed;

@@ -9,7 +9,6 @@ export default {
     name: 'Gif',
     props: {
         url: String,
-        size: Number,
     },
     data() {
         return {
@@ -18,6 +17,10 @@ export default {
     computed: {
         gif: function() {
             return require('../assets/gif/' + this.url);
+        },
+        size: function() {
+            var width = $("#about").width();
+            return width < 600 ? 50 : 80;
         }
     },
     methods: {

@@ -16,7 +16,8 @@
     animation: show-img-animation 1s forwards ease-in;
 }
 
-$triangle-size: 6vh;
+$triangle-size: 3vh;
+
 #main {
     z-index: 2;
     filter: drop-shadow(0 -5px 5px rgba(0,0,0,0.8)) drop-shadow(0 5px 5px rgba(0,0,0,0.8));
@@ -61,21 +62,28 @@ $triangle-size: 6vh;
             color: #1a4f65;
         }
     }
-        
+
     .contact-all-data {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: nowrap;
+        margin: 0 10%;
+        @media only screen and (max-width: 700px) {
+            flex-direction: column;
+            justify-content: initial;
+            flex-wrap: wrap;
+            margin: 0;
+        }
+        
         .contact-data {
-            width: 49%;
+            text-align: center;
+            margin: 10px 0;
             @media only screen and (max-width: 700px) {
                 width: 100%;
             }
-            
-            display: inline-block;
-            p {
-                color: navy;
-            }
+            color: navy;
             i {
                 margin-right: 10px;
-                color: navy;
             }
         }
         & p.contact-data:nth-of-type(1) {
@@ -131,6 +139,10 @@ $triangle-size: 6vh;
     .title {
         font-size: 45px;
         margin-top: $triangle-size;
+        margin-bottom: 100px;
+        @media (orientation: portrait) {
+            margin-bottom: 20px;
+        }
         padding-top: $triangle-size;
         color: white;
     }
@@ -138,8 +150,8 @@ $triangle-size: 6vh;
     #about-shape {
         background-color: rgb(100, 150, 200);
         text-align: center;
-        min-height: calc(100% + #{$triangle-size});
-        margin-top: -6vh;
+        min-height: calc(100vh + #{$triangle-size});
+        margin-top: -$triangle-size;
         padding-bottom: 100px;
         clip-path: polygon(
             0 $triangle-size,
