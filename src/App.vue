@@ -9,7 +9,7 @@
 				<p class="name"><b>Pierre LEROY</b></p>
 				<p>{{ age }} ans</p>
 				<p>Diplômé de l'<a target="_blank" href="https://eseo.fr/">ESEO</a> − Grande École d'Ingénieurs Généralistes à Angers</p>
-				<p>À la recherche d'opportunités en développement à Rennes.</p>
+				<p>À la recherche d'opportunités de développeur fullstack à Rennes.</p>
 
 				<div class="contact-all-data">
 					<p class="contact-data"><i class='fa fa-phone'></i><a target="_blank" href="phone">0648444512</a></p>
@@ -24,33 +24,29 @@
 
 		<div class="text-center" id="achievments">
 			<div style="margin-top: -10vh; margin-bottom: 10vh"></div> <!-- Menu scroll -->
-            <Card :direction=0 date="Septembre 2019 − Mars 2020" url="https://www.facebook.com/boulangeriegalzin/" title="Micro-entrepreneur & Voyage">
-				Statut de micro-entrepreneur durant un voyage en Nouvelle-Zélande<br>
-				Développement d'un site de plannification pour le groupe GALZIN (Laravel)
-			</Card><br>
-            <Card :direction=1 date="Septembre 2018 − Septembre 2019" url="https://oet.fr" title="OET">
-				Stage de fin d'étude en alternance (1 année)<br>
-				Conception et réalisation de MES
-			</Card>
-            <Card :direction=-1 date="Septembre − Novembre 2017" url="https://youpic.com" title="YouPic">
-				Stage technique − Développement Web (3 mois)<br>
-				Frontend (React) & backend (MySQL, Kotlin, PHP)
-			</Card>
-            <Card :direction=1 date="Janvier − Juin 2018" title="Projet SE">
-				Projet d'école option Systèmes Embarqués<br>
-				Spécification, Conception, Développement Android (Java) & Tests
-			</Card>
-            <Card :direction=-1 date="2016 − 2018" url="https://seio.org" title="SEIO">
-				DSI de la Junior-Entreprise de l'ESEO<br>
-				Suivi de projet & Développement d'un intranet (PHP, MySQL, JavaScript)
-			</Card>
-            <Card :direction=1 date="Août 2015" url="https://informatique.e-pro.fr/sarthe/modularis_f785537" title="Modularis">
-				Stage de programmation (1 mois)<br>
-				Développement d’un intranet pour la gestion des SAV (HTML, CSS, JS, PHP)
-			</Card>
-            <Card :direction=-1 date="Été 2012 à 2018" url="https://actu.fr/pays-de-la-loire/sille-le-guillaume_72334/saint-germain-de-coulamer-le-centre-de-loisirs-fete-ses-30-ans_10433330.html" title="Animateur Centre Aéré">
-				Animateur en centre aéré à St Germain de Coulamer (53700)
-			</Card>
+				<Card :direction=1 date="Août 2020 − aujourd'hui" url="https://www.devmachine.fr/" title="DEVmachine">
+					Développeur fullstack : développement de nouveaux écrans et fonctionnalités pour une application web de demandes de subvention. (Vue.js, Node)
+				</Card>
+				<Card :direction=-1 date="Septembre 2019 − aujourd'hui" url="https://www.facebook.com/boulangeriegalzin/" title="Micro-entrepreneur">
+					Statut de micro-entrepreneur pour un client.<br>
+					Développement d'un site de plannification pour le groupe GALZIN (Laravel)
+				</Card>
+				<Card :direction=1 date="Septembre 2018 − Septembre 2019" url="https://oet.fr" title="OET">
+					Stage de fin d'étude en alternance (1 année)<br>
+					Conception et réalisation de MES
+				</Card>
+				<Card :direction=-1 date="Septembre − Novembre 2017" url="https://youpic.com" title="YouPic">
+					Stage technique − Développement Web (3 mois)<br>
+					Frontend (React) & backend (MySQL, Kotlin, PHP)
+				</Card>
+				<Card :direction=1 date="Janvier − Juin 2018" title="Projet SE">
+					Projet d'école option Systèmes Embarqués<br>
+					Spécification, Conception, Développement Android (Java) & Tests
+				</Card>
+				<Card :direction=-1 date="2016 − 2018" url="https://seio.org" title="SEIO">
+					DSI de la Junior-Entreprise de l'ESEO<br>
+					Suivi de projet & Développement d'un intranet (PHP, MySQL, JavaScript)
+				</Card>
 		</div>
 
 		<b-g-parallax id="skills" url="skills.jpg" title="Compétences" credit="Photo by Jaredd Craig on Unsplash" :title-on-top=true>
@@ -58,15 +54,20 @@
 			<div id="balls">
 				<Ball text="HTML" size=80 textColor="white" bgColor="#F06529" posX=10 posY=10 />
 				<Ball text="CSS" size=60 textColor="white" bgColor="#264de4" posX=12 posY=40 />
+				
 				<Ball text="JS" size=65 textColor="#35495e" bgColor="#f7df1e" posX=28 posY=70 />
 				<Ball text="NodeJS" size=55 textColor="white" bgColor="#215732" posX=20 posY=80 />
-				<Ball text="Vue.js" size=50 textColor="#35495e" bgColor="#41b883" posX=23 posY=55 />
-				<Ball text="PHP" size=85 textColor="white" bgColor="#4f5b93" posX=40 posY=10 />
+				<Ball text="Vue.js" size=80 textColor="#35495e" bgColor="#41b883" posX=30 posY=35 />
+				<Ball text="Angular" size=50 textColor="white" bgColor="#dd1b16" posX=26 posY=15 />
+				<Ball text="React" size=50 textColor="white" bgColor="#61DBFB" posX=35 posY=15 />
+
+				<Ball text="PHP" size=70 textColor="white" bgColor="#4f5b93" posX=45 posY=10 />
 				<Ball text="Laravel" size=75 textColor="white" bgColor="#ff4b26" posX=38 posY=50 />
 
 				<Ball text="SQL" size=60 textColor="white" bgColor="#00758f" posX=50 posY=75 />
+				<Ball text="MongoDB" size=60 textColor="white" bgColor="#3FA037" posX=50 posY=55 />
 				<Ball text="Python" size=40 textColor="#4584b6" bgColor="#ffde57" posX=62 posY=10 />
-				<Ball text="Java" size=75 textColor="white" bgColor="#FFA518" posX=60 posY=30 />
+				<Ball text="Java" size=65 textColor="white" bgColor="#FFA518" posX=60 posY=30 />
 				<Ball text="Android" size=60 textColor="white" bgColor="#a4c639" posX=60 posY=60 />
 
 				<Ball text="Linux" size=60 textColor="#fdfdfb" bgColor="black" posX=70 posY=20 />
