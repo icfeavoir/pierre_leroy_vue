@@ -12,7 +12,7 @@
 				<p>À la recherche d'opportunités de développeur fullstack à Rennes.</p>
 
 				<div class="contact-all-data">
-					<p class="contact-data"><i class='fa fa-phone'></i><a target="_blank" href="phone">0648444512</a></p>
+					<p class="contact-data"><i class='fa fa-phone'></i><a target="_blank" href="tel:0648444512">0648444512</a></p>
 					<p class="contact-data"><i class='fa fa-envelope'></i><a target="_blank" href="mailto:'pierre.leroy.mail@gmail.com'">pierre.leroy.mail@gmail.com</a></p>
 					<p class="contact-data"><i class='fa fa-github-square'></i><a target="_blank" href="https://github.com/icfeavoir">Mon GitHub</a></p>
 				</div>
