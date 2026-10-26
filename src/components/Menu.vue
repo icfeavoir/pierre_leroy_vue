@@ -1,105 +1,101 @@
 <template>
-    <div id="menu">
-        <ul>
-            <li>
-                <a class="menu-choice"  href="#main">
-                <div class="little-btn active"></div><span class="menu-text">À propos</span>
-                </a>
-            </li>
-            <li>
-                <a class="menu-choice"  href="#achievments">
-                <div class="little-btn"></div><span class="menu-text">Expérience</span>
-                </a>
-            </li>
-            <li>
-                <a class="menu-choice"  href="#skills">
-                <div class="little-btn"></div><span class="menu-text">Compétences</span>
-                </a>
-            </li>
-            <li>
-                <a class="menu-choice"  href="#about">
-                <div class="little-btn"></div><span class="menu-text">Loisirs</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+  <div id="menu">
+    <ul>
+      <li>
+        <a class="menu-choice" href="#main">
+          <div class="little-btn active"></div><span class="menu-text">À propos</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-choice" href="#achievments">
+          <div class="little-btn"></div><span class="menu-text">Expériences</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-choice" href="#skills">
+          <div class="little-btn"></div><span class="menu-text">Compétences</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-choice" href="#about">
+          <div class="little-btn"></div><span class="menu-text">Loisirs</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'Menu',
-    props: {
-        title: Array,
-        divs: Array,
-    },
-    computed: {
-    },
-    mounted() {
-        // initial state
-        if (window.innerWidth > window.innerHeight) {
-            // rebind if landscape mode
-            $('.menu-choice').hover(
-            () => {$('.menu-text').css({opacity: 1})},
-            () => {$('.menu-text').css({opacity: 0})}
-            )
-        }
-
-        // ON RESIZE (MANAGIN LANDSCAPE - PORTRAIT)
-        $( window ).on( "resize", function( event ) {
-            // unbind
-            $('.menu-text').unbind('hover');
-            if (window.innerWidth > window.innerHeight) {
-                // rebind if landscape mode
-                $('.menu-choice').hover(
-                () => {$('.menu-text').css({opacity: 1})},
-                () => {$('.menu-text').css({opacity: 0})}
-                )
-            }
-        });
-
-        $('.menu-choice').click(function(e) {
-            e.preventDefault();
-            $('.little-btn').removeClass('active');
-            $(this).children('.little-btn').addClass('active');
-            var div = $($(this).attr('href')); // Page cible
-            var speed = 1000; // Durée de l'animation (en ms)
-            $('html, body').animate( { scrollTop: div.children().first().offset().top }, speed, "swing");
+  name: 'NavMenu',
+  props: {
+    title: Array,
+    divs: Array,
+  },
+  methods: {
+    bindHover() {
+      const $choices = $('.menu-choice')
+      $choices.off('mouseenter.menuHover mouseleave.menuHover')
+      if (window.innerWidth > window.innerHeight) {
+        $choices.on('mouseenter.menuHover', () => {
+          $('.menu-text').css({ opacity: 1 })
         })
-
-        // Cache selectors
-        var lastId,
-            topMenu = $("#menu"),
-            // All list items
-            menuItems = topMenu.find("a"),
-            // Anchors corresponding to menu items
-        scrollItems = menuItems.map(function(){
-            var item = $($(this).attr("href"));
-            if (item.length) { return item; }
-        });
-
-        // Bind to scroll
-        $(window).scroll(function(){
-        // Get container scroll position when 3/4 of div is shown we consider we are in it
-        var fromTop = $(this).scrollTop() + ($(window).height() / 4);
-        
-        // Get id of current scroll item
-        var cur = scrollItems.map(function(){
-            if ($(this).offset().top < fromTop) {
-            return this;
-            }
-        });
-        // Get the id of the current element
-        cur = cur[cur.length-1];
-        var id = cur && cur.length ? cur[0].id : "";
-        if (lastId !== id) {
-            lastId = id;
-            menuItems
-                .children(".little-btn").removeClass("active");
-            menuItems
-                .filter("[href='#"+id+"']").children('.little-btn').addClass('active');
-        }                   
-        });
+        $choices.on('mouseleave.menuHover', () => {
+          $('.menu-text').css({ opacity: 0 })
+        })
+      }
     },
+    onResize() {
+      this.bindHover()
+    },
+  },
+  mounted() {
+    this.bindHover()
+    $(window).on('resize.menu', this.onResize)
+
+    $('.menu-choice').on('click.menu', function (e) {
+      e.preventDefault()
+      $('.little-btn').removeClass('active')
+      $(this).children('.little-btn').addClass('active')
+      const div = $($(this).attr('href'))
+      const speed = 0
+      const target = div.children().first().offset()
+      if (target) {
+        $('html, body').animate({ scrollTop: target.top }, speed, 'swing')
+      }
+    })
+
+    let lastId
+    const topMenu = $('#menu')
+    const menuItems = topMenu.find('a')
+    const scrollItems = menuItems.map(function () {
+      const item = $($(this).attr('href'))
+      if (item.length) {
+        return item
+      }
+    })
+
+    $(window).on('scroll.menu', function () {
+      const fromTop = $(this).scrollTop() + $(window).height() / 4
+
+      let cur = scrollItems.map(function () {
+        if ($(this).offset().top < fromTop) {
+          return this
+        }
+      })
+      cur = cur[cur.length - 1]
+      const id = cur && cur.length ? cur[0].id : ''
+      if (lastId !== id) {
+        lastId = id
+        menuItems.children('.little-btn').removeClass('active')
+        menuItems.filter("[href='#" + id + "']").children('.little-btn').addClass('active')
+      }
+    })
+  },
+  beforeUnmount() {
+    $(window).off('.menu')
+    $('.menu-choice').off('.menu .menuHover')
+  },
 }
 </script>
 
@@ -123,7 +119,6 @@ export default {
     width: 100%;
     height: auto;
     text-align: center;
-    height: auto;
     padding: 0 0;
   }
 }
@@ -143,6 +138,7 @@ export default {
     text-align: center;
   }
 }
+
 .menu-text {
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
@@ -151,7 +147,7 @@ export default {
   padding: 5px 10px;
   display: inline-block;
   opacity: 0;
-  transition: opacity .5s;
+  transition: opacity 0.5s;
   @media (orientation: portrait) {
     opacity: 0;
     width: 100%;
@@ -168,46 +164,19 @@ export default {
   display: inline-block;
   margin-left: 10px;
   border-radius: 50%;
-  transition: background-color .5s;
+  transition: background-color 0.5s;
   box-shadow: 2px 2px 5px black;
 }
+
 .little-btn.active {
   background-color: white;
 }
+
 .menu-choice:hover {
   cursor: pointer;
 }
-.menu-choice:hover .little-btn {
-  background-color: rgb(200,200,200);
-}
 
-.effect
-{
-  position: relative;
-  margin: 50px auto;
-  width: 70%;
-  height: 200px;
-  background-color: rgba(255,255,255, 1);
-  overflow: visible;
-  p {
-    font-size: 30px;
-  }
-}
-.shadow-effect
-{
-  z-index: -1;
-  position: absolute;
-  content: "";
-  left: 10px;
-  width: calc(100% - 20px);
-  height: 100%;
-  filter:drop-shadow(0 5px 5px rgba(0,0,0,0.8));
-  
-  .shape {
-    width: 100%;
-    height: 100%;
-    background: #777;
-    -webkit-clip-path: polygon(0 0, 50% 10%, 100% 0, 100% 100%, 50% 90%, 0 100%);
-  }
+.menu-choice:hover .little-btn {
+  background-color: rgb(200, 200, 200);
 }
 </style>

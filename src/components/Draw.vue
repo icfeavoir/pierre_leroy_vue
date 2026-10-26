@@ -1,60 +1,95 @@
 <template>
-    <div v-bind:data-depth="realDepth" class="layer" id="draw"></div>
+  <div :data-depth="realDepth" class="layer" id="draw">
+    <svg
+      class="arrow-svg"
+      width="50"
+      height="205"
+      viewBox="0 0 50 205"
+      aria-hidden="true"
+    >
+      <path
+        ref="pathEl"
+        class="arrow-path"
+        fill="none"
+        stroke="#0d2732"
+        stroke-width="1"
+        d="M20 30 l0 75 l-20 0 l25 30 l25 -30 l-20 0 l0 -75 l-10 0"
+      />
+    </svg>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'Draw',
-    props: {
-        speed: Number,
+  name: 'Draw',
+  props: {
+    speed: Number,
+  },
+  data() {
+    return {
+      height: 500,
+      parallax: null,
+      drawTimer: null,
+    }
+  },
+  computed: {
+    realDepth() {
+      return ((this.speed || 0) * this.height) / 500
     },
-    data() {
-        return {
-            height: 500,
-        };
+  },
+  methods: {
+    onResize() {
+      this.height = window.innerHeight
     },
-    computed: {
-        realDepth: function() {
-            return (this.speed || 0) * this.height / 500;
-        },
+    startDraw() {
+      const path = this.$refs.pathEl
+      if (!path) return
+      const length = path.getTotalLength()
+      path.style.strokeDasharray = String(length)
+      path.style.strokeDashoffset = String(length)
+      // Force layout so the transition runs from the dashed start state.
+      path.getBoundingClientRect()
+      path.classList.add('is-drawn')
+      path.style.strokeDashoffset = '0'
     },
-    methods: {
-        onResize: function() {
-            this.height = $(window).height();
-        },
-    },
-    mounted() {
-        setTimeout(() => {
-            SVG($('.layer').get(0))
-                .size(50, 205)
-                .path()
-                .attr({ 
-                fill: 'none',
-                stroke: '#0d2732', 
-                'stroke-width': 1,
-            })
-                .M(20, 30)
-                .l(0, 75)
-                .l(-20, 0)
-                .l(25, 30)
-                .l(25, -30)
-                .l(-20, 0)
-                .l(0, -75)
-                .l(-10, 0)
-                .drawAnimated({
-                    easing: "<>"
-                });
-        }, 2000);
-    this.onResize();
-    window.addEventListener('resize', this.onResize);
+  },
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
 
-    new Parallax($(this.$el).parent().get(0));
+    // Match the original delayed draw-in.
+    this.drawTimer = window.setTimeout(() => {
+      this.startDraw()
+    }, 2000)
+
+    if (this.$el.parentElement) {
+      this.parallax = new window.Parallax(this.$el.parentElement, {
+        scalarX: 28,
+        scalarY: 28,
+      })
+    }
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.onResize)
+    if (this.drawTimer) {
+      window.clearTimeout(this.drawTimer)
+    }
+    if (this.parallax) {
+      this.parallax.destroy()
+    }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-    template {
-        overflow-x: hidden;
-    }
+.layer {
+  overflow-x: hidden;
+  display: inline-block;
+  width: 50px;
+  height: 205px;
+}
+
+.arrow-path {
+  transition: stroke-dashoffset 1.6s ease-in-out;
+}
 </style>

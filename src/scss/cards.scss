@@ -67,9 +67,15 @@ $open-card-height: 220px;
 }
 
 .parcours-bloc-parent {
-    display: inline-block;
-    margin: 0 0 5vh;
+    display: block;
+    margin: 0;
     position: relative;
+    width: 100%;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
     
     .parcours-bloc {
         font-family: 'Roboto Condensed';
@@ -94,6 +100,7 @@ $open-card-height: 220px;
             color: #ddd;
             padding: 0 2%;
             font-size: medium;
+            line-height: 1.2;
             position: absolute;
             left: 0;
             right: 0;
@@ -126,8 +133,4 @@ $open-card-height: 220px;
             -webkit-transition: visibility 0s, opacity 1s;
         }
     }
-}
-
-a:hover {
-    text-decoration: none;
 }

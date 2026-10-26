@@ -1,30 +1,38 @@
 # pierre_leroy
-using VUE CLI
+
+Vue 3 + Vite portfolio site. Requires **Node.js 24+**.
 
 ## Project setup
-```
+
+```bash
+nvm use   # or: nvm use 24
 npm install
 ```
 
 ### Compiles and hot-reloads for development
-```
-npm run serve
+
+```bash
+npm run dev
 ```
 
 ### Compiles and minifies for production
-```
+
+```bash
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
+### Preview production build
+
+```bash
+npm run preview
 ```
 
 ### Lints and fixes files
-```
+
+```bash
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Deploy
+`scp -r dist/* root@vps:/var/www/pierre_leroy/`

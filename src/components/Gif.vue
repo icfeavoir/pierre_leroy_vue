@@ -1,34 +1,30 @@
 <template>
-    <div class="gif-container">
-        <img :src="gif" v-bind:style="{width: size + '%'}">
-    </div>
+  <div class="gif-container">
+    <img :src="gif" :style="{ width: size + '%' }" alt="">
+  </div>
 </template>
 
 <script>
+const gifImages = import.meta.glob('../assets/gif/*', {
+  eager: true,
+  import: 'default',
+})
+
 export default {
-    name: 'Gif',
-    props: {
-        url: String,
+  name: 'Gif',
+  props: {
+    url: String,
+  },
+  computed: {
+    gif() {
+      const key = `../assets/gif/${this.url}`
+      return gifImages[key] || ''
     },
-    data() {
-        return {
-        };
+    size() {
+      const about = document.getElementById('about')
+      const width = about ? about.clientWidth : 800
+      return width < 600 ? 50 : 80
     },
-    computed: {
-        gif: function() {
-            return require('../assets/gif/' + this.url);
-        },
-        size: function() {
-            var width = $("#about").width();
-            return width < 600 ? 50 : 80;
-        }
-    },
-    methods: {
-    },
-    mounted() {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

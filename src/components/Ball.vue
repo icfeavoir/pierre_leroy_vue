@@ -1,14 +1,17 @@
 <template>
-  <div class="ball-container" v-bind:data-depth="depth">
-    <div class="ball" v-bind:style="{
-      width: realSize + 'px',
-      height: realSize + 'px',
-      left: realX + 'px',
-      top: realY + 'px',
-      backgroundColor: bgColor,
-      color: textColor
-    }">
-      <p class="ball-skill" :style="{'font-size': fontSize}">{{ text }}</p>
+  <div class="ball-container" :data-depth="depth">
+    <div
+      class="ball"
+      :style="{
+        width: realSize + 'px',
+        height: realSize + 'px',
+        left: realX + 'px',
+        top: realY + 'px',
+        backgroundColor: bgColor,
+        color: textColor,
+      }"
+    >
+      <p class="ball-skill" :style="{ 'font-size': fontSize }">{{ text }}</p>
     </div>
   </div>
 </template>
@@ -18,9 +21,9 @@ export default {
   name: 'Ball',
   props: {
     containerSize: String,
-    size: String,
-    posX: String,
-    posY: String,
+    size: [String, Number],
+    posX: [String, Number],
+    posY: [String, Number],
     bgColor: String,
     textColor: String,
     text: String,
@@ -30,30 +33,32 @@ export default {
       propor: 1,
       width: 1,
       height: 1,
+      landscape: 1,
     }
   },
   computed: {
-    depth: () => {
-      return -1 * (0.4 + Math.random() * 3);
+    depth() {
+      return -1 * (0.4 + Math.random() * 3)
     },
-    realSize: function() {
-      return parseInt(this.size) * this.propor / 250 * 1 / this.landscape;
+    realSize() {
+      return (parseInt(this.size, 10) * this.propor) / 250 / this.landscape
     },
-    realX: function() {
-      return this.posX * this.width / 100;
+    realX() {
+      return (this.posX * this.width) / 100
     },
-    realY: function() {
-      return this.posY * this.height / 100;
+    realY() {
+      return (this.posY * this.height) / 100
     },
-    fontSize: function() {
-      return this.realSize * 1.2 / this.text.length + 'px';
-    }
+    fontSize() {
+      return this.realSize * 1.2 / this.text.length + 'px'
+    },
   },
   methods: {
-    winValues: function() {
-      this.width = $("#balls").width();
-      this.height = $("#balls").height();
-      this.propor = Math.min(this.width, this.height);
+    winValues() {
+      const balls = document.getElementById('balls')
+      this.width = balls ? balls.clientWidth : 1
+      this.height = balls ? balls.clientHeight : 1
+      this.propor = Math.min(this.width, this.height)
       this.landscape = this.width > this.height ? 1 : 1.5
     },
   },
@@ -61,15 +66,14 @@ export default {
     this.winValues()
     window.addEventListener('resize', this.winValues)
   },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.winValues)
+  },
 }
-
-
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .ball {
-  /* DEFAULT */
   background-color: black;
   color: blue;
   position: absolute;
